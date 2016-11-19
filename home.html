@@ -59,10 +59,53 @@
             <!-- /.container-fluid -->
         </nav>
     </header>
-    <div class="container">
+     <div class="container-fluid">
         <div class="row">
-            <div class="mainContent-wrapper ">
-                <a href="home.html" type="button" class="btn btn-primary">go to dashboard</a>
+            <div id="sidebar" class="col-lg-2 col-md-3 col-sm-2 hidden-xs sidebar-wrapper">
+                <ul class="sidebar-list">
+                    <li><a href="home.html"><h4>ALL</h4></a></li>
+                    <li>
+                        <a data-toggle="collapse" data-target="#it"><span class="glyphicon glyphicon-chevron-right"></span> IT</a>
+                        <ul id="it" class="collapse">
+                            <li><a href="#">Title news</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a data-toggle="collapse" data-target="#job"><span class="glyphicon glyphicon-chevron-right"></span> Job</a>
+                        <ul id="job" class="collapse">
+                            <li><a href="#">Title news</a></li>
+                        </ul>
+                    </li>
+                    <div class="btn-wrapper">
+                        <a href="add.html" type="button" class="btn btn-primary">Add</a>
+                    </div>
+                </ul>
+            </div>
+            <div class="mainContent-wrapper col-lg-10 col-lg-offset-2 col-md-9 col-md-offset-3 col-sm-10 col-sm-offset-2">
+                <!-- <div class="container-fluid"> -->
+                <div class="row">
+                    <div class="contentHead">
+                        <h2>ALL</h2>
+                        <div class="row">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default glyphicon glyphicon-list"></button>
+                                <button type="button" class="btn btn-default glyphicon glyphicon-th-list"></button>
+                                <button type="button" class="btn btn-default glyphicon glyphicon-th-large"></button>
+                            </div>
+                            <button type="button" class="btn btn-default dropdown-toggle glyphicon glyphicon-sort" type="button" data-toggle="dropdown"></button>
+                            <ul class="dropdown-menu sort-list">
+                                <li class="active"><a href="#">Newest</a></li>
+                                <li><a href="#">Oldest</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end contentHead-->
+                </div>
+                <div class="row">
+                    <div class="contentBody">
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>

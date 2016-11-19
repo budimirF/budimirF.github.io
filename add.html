@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>My RSS reader</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#user-menu" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="logo_wrapper">
+                        <a class="navbar-brand" href="index.html">RSS Reader</a>
+                    </div>
+                </div>
+                <div class="collapse navbar-collapse" id="user-menu">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown hidden-xs">
+                            <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Login</a>
+                            <ul class="dropdown-menu ">
+                                <li><a href="#">Profile</a></li>
+                                <li><a href="#">Settings</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Logout</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown open visible-xs xs-menu">
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Profile</a></li>
+                                <li><a href="#">Settings</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <div id="sidebar" class="col-lg-2 col-md-3 col-sm-2 hidden-xs sidebar-wrapper">
+                <ul class="sidebar-list">
+                    <li><a href="home.html"><h4>ALL</h4></a></li>
+                    <li>
+                        <a data-toggle="collapse" data-target="#it"><span class="glyphicon glyphicon-chevron-right"></span> IT</a>
+                        <ul id="it" class="collapse">
+                            <li><a href="#">Title news</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a data-toggle="collapse" data-target="#job"><span class="glyphicon glyphicon-chevron-right"></span> Job</a>
+                        <ul id="job" class="collapse">
+                            <li><a href="#">Title news</a></li>
+                        </ul>
+                    </li>
+                    <div class="btn-wrapper">
+                        <button type="button" class="btn btn-primary">Add</button>
+                    </div>
+                </ul>
+            </div>
+            <div class="mainContent-wrapper col-lg-10 col-lg-offset-2 col-md-9 col-md-offset-3 col-sm-10 col-sm-offset-2">
+                <!-- <div class="container-fluid"> -->
+                <div class="container">
+                    <div class="row">
+                        <div class="addForm col-lg-6 col-lg-offset-3" >
+                            <h2>NEW FEED</h2>
+                            <form class="form-horizontal ">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="url">Url:</label>
+                                    <div class="col-sm-10">
+                                        <input type="url" class="form-control" id="url" placeholder="Enter url">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="category">Category:</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="category">
+                                            <option translate="" value="" disabled="" selected="selected" class="" hidden="">Choose</option>
+                                            <option label="News" value="News">News</option>
+                                            <option label="IT" value="IT">IT</option>
+                                            <option label="Sport" value="Sport">Sport</option>
+                                            <option label="Design" value="Design">Design</option>
+                                            <option label="Movies" value="Movies">Movies</option>
+                                            <option label="Music" value="Music">Music</option>
+                                            <option label="Culture" value="Culture">Culture</option>
+                                            <option label="Nature" value="Nature">Nature</option>
+                                            <option label="Gaming" value="Gaming">Gaming</option>
+                                            <option label="Food" value="Food">Food</option>
+                                            <option label="Economics" value="Economics">Economics</option>
+                                            <option label="Science" value="Science">Science</option>
+                                            <option label="Job" value="Job">Job</option>
+                                            <option label="Custom" value="Custom">Custom</option>
+                                        </select>
+                                    </div>
+                                </div>
+  
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Add feed</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <footer class="">
+        <div class="container-fluid">
+            <div class="row">
+                <p>Footer Text</p>
+            </div>
+        </div>
+    </footer>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js "></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.js "></script>
+</body>
+
+</html>
