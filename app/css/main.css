@@ -1,0 +1,268 @@
+@media (min-width: 768px) {
+  .omb_row-sm-offset-3 div:first-child[class*="col-"] {
+    margin-left: 25%; } }
+
+.omb_login {
+  padding-top: 100px; }
+
+.omb_login .omb_authTitle {
+  text-align: center;
+  line-height: 300%; }
+
+.omb_login .omb_socialButtons a {
+  color: white;
+  opacity: 0.9; }
+
+.omb_login .omb_socialButtons a:hover {
+  color: white;
+  opacity: 1; }
+
+.omb_login .omb_socialButtons .omb_btn-facebook {
+  background: #3b5998; }
+
+.omb_login .omb_socialButtons .omb_btn-twitter {
+  background: #00aced; }
+
+.omb_login .omb_socialButtons .omb_btn-google {
+  background: #c32f10; }
+
+.omb_login .omb_socialButtons .omb_btn-linkedin {
+  background: #4875B4; }
+
+.row.omb_socialButtons {
+  padding-right: 15px; }
+
+.row.omb_row-sm-offset-3 .checkbox {
+  padding-left: 20px; }
+
+.omb_login .omb_loginOr {
+  position: relative;
+  font-size: 1.5em;
+  color: #aaa;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em; }
+
+.omb_login .omb_loginOr .omb_hrOr {
+  background-color: #cdcdcd;
+  height: 1px;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important; }
+
+.omb_login .omb_loginOr .omb_spanOr {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: -0.6em;
+  margin-left: -1.5em;
+  background-color: white;
+  width: 3em;
+  text-align: center; }
+
+.omb_login .omb_loginForm .input-group.i {
+  width: 2em; }
+
+.omb_login .omb_loginForm .help-block {
+  color: red; }
+
+@media (min-width: 768px) {
+  .omb_login .omb_forgotPwd {
+    text-align: right;
+    margin-top: 10px; } }
+
+.regWrapper {
+  max-width: 360px;
+  margin-top: 100px; }
+  .regWrapper form {
+    margin: 0px 10px; }
+  .regWrapper h2 {
+    margin-top: 2px;
+    margin-bottom: 2px; }
+  .regWrapper .divider {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 5px; }
+  .regWrapper .divider hr {
+    margin: 7px 0px;
+    width: 35%; }
+  .regWrapper .left {
+    float: left; }
+  .regWrapper .right {
+    float: right; }
+
+/*header, footer, sidebar*/
+html {
+  position: relative;
+  min-height: 100%; }
+
+body {
+  margin-bottom: 100px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px; }
+
+footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 80px;
+  padding: 30px 0;
+  border: 1px solid transparent;
+  background-color: #f8f8f8;
+  border-color: #e7e7e7;
+  z-index: 1000; }
+  footer p {
+    text-align: center; }
+
+.navmenu-fixed-left {
+  top: 51px;
+  bottom: 80px; }
+
+#sidebarMenu {
+  padding-left: 0;
+  padding-right: 0; }
+  #sidebarMenu li a {
+    text-decoration: none;
+    color: black;
+    padding-left: 30px; }
+  #sidebarMenu li {
+    list-style: none;
+    cursor: pointer; }
+    #sidebarMenu li :hover,
+    #sidebarMenu li :focus {
+      color: #ffffff;
+      background-color: #337ab7; }
+  #sidebarMenu .titleNews li {
+    padding: 10px 5px; }
+    #sidebarMenu .titleNews li :focus {
+      background-color: yellow !important; }
+  #sidebarMenu div.btnAdd {
+    padding-top: 40px;
+    text-align: center; }
+    #sidebarMenu div.btnAdd a {
+      width: 100px; }
+
+.offcanvas-xs.in {
+  top: 0;
+  padding-top: 35px; }
+
+.navbar-header button:nth-of-type(1) {
+  float: left;
+  margin-left: 10px; }
+
+.navbar-right .hidden-xs {
+  margin-right: 20px; }
+
+.logo_wrapper {
+  margin-left: 60px; }
+
+.xs-menu {
+  z-index: 996; }
+  .xs-menu ul {
+    text-align: center; }
+
+.btn-wrapper {
+  text-align: center;
+  margin: 30px 0; }
+
+.dashboard-wrapper {
+  margin-top: 51px; }
+  @media (min-width: 768px) {
+    .dashboard-wrapper {
+      margin-left: 300px; } }
+
+.index-wrapper,
+.add-wrapper {
+  margin-top: 100px; }
+  .index-wrapper h1, .index-wrapper h2,
+  .add-wrapper h1,
+  .add-wrapper h2 {
+    text-align: center; }
+
+.offcanvas-xs.in {
+  width: 200px;
+  bottom: 0; }
+
+.contentHead {
+  padding-left: 30px;
+  padding-right: 15px; }
+
+.contentBody {
+  padding: 10px; }
+  .contentBody .feedTable {
+    padding: 10px; }
+  .contentBody .article {
+    height: 176px;
+    margin-bottom: 20px;
+    margin-right: 0;
+    padding-left: 0;
+    border: none;
+    border-radius: 2px;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    overflow: hidden; }
+    .contentBody .article:hover {
+      border: none;
+      -webkit-transition: all .2s ease;
+      transition: all .2s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); }
+    .contentBody .article .favouriteMark {
+      border-color: transparent #ff9d00 transparent transparent;
+      border-style: solid;
+      border-width: 0 30px 30px 0;
+      height: 0;
+      left: 100%;
+      margin-left: 8px;
+      position: absolute;
+      -webkit-transform: translateX(-125%);
+              transform: translateX(-125%);
+      width: 0; }
+    .contentBody .article .imgWrapper {
+      width: 256px;
+      height: 100%;
+      float: left;
+      margin-right: 10px;
+      background-position-x: 50% !important;
+      background-position-y: 50% !important;
+      background-size: cover !important;
+      border-radius: 2px 0 0 2px; }
+  .contentBody .articleDescription {
+    padding: 8px;
+    height: 70px; }
+  .contentBody::after {
+    content: "";
+    display: block;
+    clear: both; }
+
+.feedTable::after {
+  content: "";
+  display: block;
+  clear: both; }
+
+.sort-list {
+  left: 135px; }
+
+.chevronRotated {
+  -webkit-transform: rotate(90deg) !important;
+          transform: rotate(90deg) !important;
+  -webkit-transition: -webkit-transform 0.35s linear;
+  transition: -webkit-transform 0.35s linear;
+  transition: transform 0.35s linear;
+  transition: transform 0.35s linear, -webkit-transform 0.35s linear; }
+
+.chevronRotate {
+  -webkit-transform: rotate(0);
+          transform: rotate(0);
+  -webkit-transition: -webkit-transform 0.35s linear;
+  transition: -webkit-transform 0.35s linear;
+  transition: transform 0.35s linear;
+  transition: transform 0.35s linear, -webkit-transform 0.35s linear; }
+
+.form-wrapper,
+.form-wrapper button {
+  margin-top: 30px; }
+  .form-wrapper button,
+  .form-wrapper button button {
+    width: 150px; }
