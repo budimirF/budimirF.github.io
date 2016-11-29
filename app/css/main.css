@@ -175,10 +175,15 @@ footer {
 .index-wrapper,
 .add-wrapper {
   margin-top: 100px; }
-  .index-wrapper h1, .index-wrapper h2,
+  .index-wrapper h1, .index-wrapper h3, .index-wrapper .successBtn,
   .add-wrapper h1,
-  .add-wrapper h2 {
+  .add-wrapper h3,
+  .add-wrapper .successBtn {
     text-align: center; }
+  .index-wrapper .successBtn a,
+  .add-wrapper .successBtn a {
+    width: 100px;
+    margin-right: 20px; }
 
 .contentHead {
   padding-left: 30px;
