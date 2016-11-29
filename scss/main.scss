@@ -115,8 +115,14 @@ footer {
 .index-wrapper,
 .add-wrapper {
     margin-top: 100px;
-    h1 , h2 {
+    h1 , h3 , .successBtn {
         text-align: center;
+    }
+    .successBtn {
+        a {
+            width: 100px;
+            margin-right: 20px;
+        }
     }
 }
 
