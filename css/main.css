@@ -135,8 +135,6 @@ footer {
       background-color: #337ab7; }
   #sidebarMenu .titleNews li {
     padding: 10px 5px; }
-    #sidebarMenu .titleNews li :focus {
-      background-color: yellow !important; }
   #sidebarMenu div.btnAdd {
     padding-top: 40px;
     text-align: center; }
@@ -145,7 +143,9 @@ footer {
 
 .offcanvas-xs.in {
   top: 0;
-  padding-top: 35px; }
+  padding-top: 35px;
+  width: 200px;
+  bottom: 0; }
 
 .navbar-header button:nth-of-type(1) {
   float: left;
@@ -180,10 +180,6 @@ footer {
   .add-wrapper h2 {
     text-align: center; }
 
-.offcanvas-xs.in {
-  width: 200px;
-  bottom: 0; }
-
 .contentHead {
   padding-left: 30px;
   padding-right: 15px; }
@@ -193,7 +189,7 @@ footer {
   .contentBody .feedTable {
     padding: 10px; }
   .contentBody .article {
-    height: 176px;
+    height: 200px;
     margin-bottom: 20px;
     margin-right: 0;
     padding-left: 0;
@@ -201,13 +197,14 @@ footer {
     border-radius: 2px;
     -webkit-transition: all .2s ease;
     transition: all .2s ease;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    overflow: hidden; }
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
     .contentBody .article:hover {
       border: none;
       -webkit-transition: all .2s ease;
       transition: all .2s ease;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); }
+      .contentBody .article:hover .footerArticle button {
+        visibility: visible !important; }
     .contentBody .article .favouriteMark {
       border-color: transparent #ff9d00 transparent transparent;
       border-style: solid;
@@ -223,14 +220,34 @@ footer {
       width: 256px;
       height: 100%;
       float: left;
-      margin-right: 10px;
+      margin-right: 20px;
       background-position-x: 50% !important;
       background-position-y: 50% !important;
       background-size: cover !important;
       border-radius: 2px 0 0 2px; }
-  .contentBody .articleDescription {
-    padding: 8px;
-    height: 70px; }
+    .contentBody .article .articleTitle {
+      padding-top: 10px;
+      height: 40px;
+      margin-bottom: 10px; }
+    .contentBody .article .articleDescription {
+      height: 70px;
+      margin-bottom: 1.1em;
+      overflow: hidden; }
+    .contentBody .article .articleTitle,
+    .contentBody .article .articleDescription,
+    .contentBody .article .footerArticle {
+      margin-left: 20px; }
+    .contentBody .article .footerArticle button {
+      visibility: hidden; }
+    .contentBody .article .footerArticle span:nth-of-type(-1n+2) {
+      margin-left: 15px;
+      cursor: pointer; }
+      .contentBody .article .footerArticle span:nth-of-type(-1n+2):hover {
+        color: #ff9d00; }
+    .contentBody .article .footerArticle span:nth-last-of-type(1) {
+      margin-top: 10px;
+      float: right;
+      color: rgba(148, 137, 137, 0.78); }
   .contentBody::after {
     content: "";
     display: block;
