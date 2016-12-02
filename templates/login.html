@@ -1,40 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>My RSS reader</title>
-    <!-- Bootstrap -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/jasny-bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-
-<body>
-    <header>
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <div class="logo_wrapper">
-                        <a class="navbar-brand" href="index.html">RSS Reader</a>
-                    </div>
-                </div>
-            </div>        <!-- /.container-fluid -->
-        </nav>
-    </header>
-    <div class="container">
+ <div class="container">
     <!-- http://bootsnipp.com/snippets/featured/responsive-login-with-social-buttons -->
         <div class="omb_login">
             <h3 class="omb_authTitle">Login or <a href="registration.html">Sign up</a></h3>
@@ -84,7 +48,7 @@
                         </div>
                         <span class="help-block">Password error</span>
                         <!-- <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button> -->
-                        <a href="dashboard.html" class="btn btn-lg btn-primary btn-block" type="button">Login</a> <!--temporary -->
+                        <a ui-sref="dashboard" class="btn btn-lg btn-primary btn-block" type="button">Login</a> <!--temporary -->
                     </form>
                 </div>
             </div>
@@ -102,20 +66,3 @@
             </div>
         </div>
     </div>
-    <footer class="">
-        <div class="container-fluid">
-            <div class="row">
-                <p>Footer Text</p>
-            </div>
-        </div>
-    </footer>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js "></script>
-    <script src="js/bootstrap.js "></script>
-    <script src="js/jasny-bootstrap.js "></script>
-    <script src="js/script.js "></script>
-    <script>
-    </script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-</body>
-
-</html>
