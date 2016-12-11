@@ -20,30 +20,60 @@
                         templateUrl: 'templates/dashboard.html',
                         controller: 'dashboardController'
                     },
-                    dashboardSidebar : {
+                    'head@dashboard' : {
+                        templateUrl: 'templates/dashboardHead.html',
+                        controller: 'dashboardController'
+                    },
+                    'sidebar' : {
                         templateUrl: 'templates/sidebar.html',
                         controller: 'sidebarController'
                     }
                 }
+            })
+            .state('dashboard.list-lg', {
+                url: '/list-lg',
+                templateUrl: 'templates/dashboardListLg.html',
+                controller: 'dashboardController'
+            })
+            .state('dashboard.add', {
+                    url: '/add',
+                    templateUrl: 'templates/add.html',
+                    controller: 'addController'
             });
-            // .state('addPage',{
-            //     '': views {
-            //         url: '/add',
-            //         templateUrl: 'templates/add.html'
-            //         // controller: 'addPage'
-            //     },
-
-            // });
     }]);
 })();
 
-// console.log($scope.category);
-
 (function() {
     'use strict';
-    angular.module('rssReader').controller('dashboardController', ['$scope', '$state', 'dataService', function($scope, $state, dataService) {
-      $scope.articles = dataService.dataArticles.feedArticles;
-      
+    angular.module('rssReader').controller('addController', ['$scope', '$state', 'addFeedService',  function($scope, $state, addFeedService) {
+        $scope.feed = {};
+        $scope.getFeed = function () {
+            addFeedService.getSrcFeed($scope.feedUrl).then(function(res) {
+                console.log(res);
+                $scope.feed = addFeedService.getParsedFeed(res, $scope.feedCategory);
+                addFeedService.saveData($scope.feed);
+                console.log($scope.feed)
+                $state.go('dashboard.list-lg');
+            });
+        }
+        
+    }]);
+
+})();
+(function() {
+    'use strict';
+    angular.module('rssReader').controller('dashboardController', ['$scope', '$state', 'addFeedService', 'dashboardService', function($scope, $state, addFeedService, dashboardService) {
+        $scope.articles = dashboardService.getArticles();
+        // console.log($scope.articles);
+        if (!$scope.articles) {
+            $state.go('dashboard.add');
+        }
+
+        $scope.isRead = function () {
+            let re = new RegExp("dashboard.add");
+            return (!re.test($state.current.name));
+        }
+
     }]);
 
 })();
@@ -58,9 +88,21 @@
 
 (function() {
     'use strict';
-    angular.module('rssReader').controller('sidebarController', ['$scope', '$state', 'dataService', function($scope, $state, dataService) {
-        $scope.category = dataService.categorySidebar.category;
-        
+    angular.module('rssReader').controller('navController', ['$scope', '$state', function($scope, $state) {
+      $scope.isDasboard = function () {
+        return /dashboard/.test($state.current.name);
+      }
+    }]);
+
+})();
+(function() {
+    'use strict';
+    angular.module('rssReader').controller('sidebarController', ['$scope', '$state', 'dashboardService', function($scope, $state, dashboardService) {
+        $scope.getListCategory = function () {
+           $scope.listSidebar = dashboardService.getCategorySidebar();
+           // console.log($scope.listSidebar);
+        } 
+
         $scope.rotateChevron = function($event) {
             var chevronRigth = angular.element($event.target).children().hasClass('chevronRotate'),
                 chevronDown = angular.element($event.target).children().hasClass('chevronRotated');
@@ -75,42 +117,112 @@
 
 })();
 
-angular.module('rssReader').factory('dataService', ['$http', function($http){
-    function getCategorySidebar(){
+angular.module('rssReader').factory('addFeedService', ['$http', function($http) {
+    'use strict';
+    var listFeeds = [];
+
+    function saveData (feed) {
+        listFeeds.push(feed);
+    }
+
+    function getText(html) {
+        return angular.element(`<div>${html}</div>`).text().replace(/\n+/g,' ');
+    }
+
+    function getImgUrl (html) {
+        var imgElem = angular.element(`<div>${html}</div>`).find('img')[0];
+        return imgElem ? imgElem.src : '';
+    }
+
+    function getDate (dateRaw) {
+        console.log(dateRaw);
+        var date = new Date(dateRaw);
+        console.log(date);
+        return date;
+    }
+
+    function getSrcFeed(url) {
+        return $http.jsonp('https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url)).
+        then(function(response) {
+            return response.data;
+        });
+    }
+
+    function getParsedArticles (articles, category) {
+        var changedArticles = [];
+        articles.forEach( function(el) {
+            changedArticles.push({
+                title : el.title,
+                category: category,
+                content : getText(el.content),
+                img : getImgUrl(el.content),
+                link : el.link,
+                date : getDate(el.publishedDate)
+            })
+        });
+        return changedArticles;
+    }
+
+    function getParsedFeed(feed, category) {
+        feed = feed.responseData.feed;
         return {
-            category : [{
-                title: "IT",
-                id: 0,
-                titleFeeds: ["Linux.org.ru: Новости", "Интересные / Публикации / Хабралента"]
-            }, {
-                title: "Job",
-                id: 1,
-                titleFeeds: ["Вакансии в Львове для начинающих на DOU.ua"]
-            }, {
-                title: "Job",
-                id: 2,
-                titleFeeds: ["Вакансии в Львове для начинающих на DOU.ua"]
-            }]
+            feedTitle : feed.title,
+            feedCategory: category,
+            feedDescription : feed.description,
+            feedArticles : getParsedArticles(feed.entries, category)
         }
     }
 
-    function getDataArticles(){
-        return {
-            feedArticles : [{
-                title: "10 книг по UI/UX дизайну, которые стоит прочитать",
-                imgUrl: "https://habrastorage.org/files/66e/c47/8be/66ec478be601474684a976860200b4c1.jpg",
-                description: "Хабы: Интерфейсы, Дизайн мобильных приложений, Веб-дизайн, Usability, Блог компании Everyday Tools Стать отличным UI/UX дизайнером не так просто: нужно знать основы, постоянно отслеживать последние тенденции и использовать их на практике. Каждый из нас время от времени обращается за советом к коллегам или друзьям, но когда нужна проверенная информация, лучшие советчики – это специализированные издания.",
-                date: "28/11/16 22:40"
-            }, {
-                title: "[Перевод] Руководство для начинающих VR-разработчиков",
-                imgUrl: "https://habrastorage.org/files/c3b/6bb/d40/c3b6bbd40dc847e2ab3246f6a028fc01.jpg",
-                description: "В этом руководстве собраны базовые ссылки и рекомендации, которые могут послужить вам точкой отсчёта в освоении VR-разработки. 1. Изучаем оборудование Спросите себя: меня интересует разработка для десктопных устройств, наподобие HTC Vive, или меня больше привлекают мобильные устройства вроде Samsung Gear VR или Google Cardboard? Если вы пока не определились, то почитайте обзоры и подумайте о том, что лучше выбрать для вашего рынка. Если для ваших идей требуются контроллеры движения или качественная графика, то ориентируйтесь на подключаемые к компьютеру очки VR. Модели, которые сегодня поддерживаются движками Unity, Unreal и веб-реaлизациями:",
-                date: "24/11/16 14:12"
-            }]
-        }
+    function getSavedFeeds () {
+        return  listFeeds;
     }
+
     return {
-        categorySidebar : getCategorySidebar(),
-        dataArticles : getDataArticles()
+        getSrcFeed : getSrcFeed,
+        getParsedFeed: getParsedFeed,
+        saveData : saveData,
+        getSavedFeeds : getSavedFeeds
+    }
+}]);
+
+angular.module('rssReader').factory('dashboardService', ['addFeedService', '$filter', function(addFeedService, $filter) {
+    'use strict';
+    var listFeeds = addFeedService.getSavedFeeds();
+
+    function getCategorySidebar() {
+        var listFeedSidebar = [];
+
+        if (listFeeds.length) {
+            listFeeds.forEach(function(elem, index) {
+                listFeedSidebar.push({
+                    category: elem.feedCategory,
+                    id: index,
+                    titleFeeds: [elem.feedTitle]
+                })
+            });
+        }
+        return listFeedSidebar;
+    }
+
+
+    function getArticles(category) {
+        var articles;
+
+        if (listFeeds.length) {
+            articles = [];
+            listFeeds.forEach( function(elem) {
+                // console.log(elem.feedArticles);
+                elem.feedArticles.forEach( function(elem) {
+                    articles.push(elem)
+                });
+            });
+        }
+        return articles;
+        // return listFeeds.length ? listFeeds[0].feedArticles : '';
+    }
+
+    return {
+        getArticles: getArticles,
+        getCategorySidebar: getCategorySidebar
     }
 }]);

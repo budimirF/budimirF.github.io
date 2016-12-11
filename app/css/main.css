@@ -189,6 +189,9 @@ footer {
   padding-left: 30px;
   padding-right: 15px; }
 
+.list-lg {
+  margin: 0; }
+
 .contentBody {
   padding: 10px; }
   .contentBody .feedTable {

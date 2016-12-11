@@ -23,11 +23,10 @@ gulp.task('sass', function() {
         }))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('app/css'));
-        // .pipe(browserSync.reload({stream: true}));
 });
 
 gulp.task('scripts', function () {
-        return gulp.src(['app/js/**/*.js', '!app/js/app.min.js', '!app/js/app.js', '!app/js/bootstrap.js', '!app/js/jasny-bootstrap.js'])
+        return gulp.src(['app/js/**/*.js', '!app/js/app.min.js', '!app/js/app.js', '!app/js/lib/*.*'])
             .pipe(concat('app.js'))
             .pipe(gulp.dest('app/js/'))
             .pipe(sourcemaps.init())
@@ -39,7 +38,6 @@ gulp.task('scripts', function () {
                 console.log(e);
             })
             .pipe(gulp.dest('app/js/'))
-            // .pipe(browserSync.reload({stream: true}));
 });
 
 gulp.task('browser-sync', function() { // Создаем таск browser-sync

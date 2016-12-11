@@ -1,0 +1,24 @@
+<div class="row list-lg" >
+    <div class="contentBody">
+        <div class="feedTable">
+            <div class="article col-lg-12" ng-repeat="article in articles">
+                <div class="favouriteMark-"></div>
+                <div class="imgWrapper img-responsive hidden-sm hidden-xs" style="background: url({{article.img}});" ng-show="article.img">
+                </div>
+                <div class="articleTitle">
+                    <strong>{{article.title}}</strong>
+                </div>
+                <div class="articleDescription">
+                    {{article.content}}
+                </div>
+                <div class="footerArticle">
+                    <button class="btn btn-default">Read</button>
+                    <span class="fa fa-star-o fa-lg"></span>
+                    <span class="fa fa-share-alt fa-lg"></span>
+                    <span class="fa fa-clock-o"> {{article.date}}</span>
+                </div>
+            </div>
+        </div>
+        <!--feedTable-->
+    </div>
+</div>
