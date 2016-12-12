@@ -2,7 +2,7 @@
     'use strict';
     angular.module('rssReader').controller('sidebarController', ['$scope', '$state', 'dashboardService', function($scope, $state, dashboardService) {
         $scope.getListCategory = function () {
-           $scope.listSidebar = dashboardService.getCategorySidebar();
+           $scope.listFeedSidebar = dashboardService.getCategorySidebar();
            // console.log($scope.listSidebar);
         } 
 

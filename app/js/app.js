@@ -49,10 +49,8 @@
         $scope.feed = {};
         $scope.getFeed = function () {
             addFeedService.getSrcFeed($scope.feedUrl).then(function(res) {
-                console.log(res);
                 $scope.feed = addFeedService.getParsedFeed(res, $scope.feedCategory);
                 addFeedService.saveData($scope.feed);
-                console.log($scope.feed)
                 $state.go('dashboard.list-lg');
             });
         }
@@ -64,6 +62,7 @@
     'use strict';
     angular.module('rssReader').controller('dashboardController', ['$scope', '$state', 'addFeedService', 'dashboardService', function($scope, $state, addFeedService, dashboardService) {
         $scope.articles = dashboardService.getArticles();
+        
         // console.log($scope.articles);
         if (!$scope.articles) {
             $state.go('dashboard.add');
@@ -99,7 +98,7 @@
     'use strict';
     angular.module('rssReader').controller('sidebarController', ['$scope', '$state', 'dashboardService', function($scope, $state, dashboardService) {
         $scope.getListCategory = function () {
-           $scope.listSidebar = dashboardService.getCategorySidebar();
+           $scope.listFeedSidebar = dashboardService.getCategorySidebar();
            // console.log($scope.listSidebar);
         } 
 
@@ -135,10 +134,7 @@ angular.module('rssReader').factory('addFeedService', ['$http', function($http) 
     }
 
     function getDate (dateRaw) {
-        console.log(dateRaw);
-        var date = new Date(dateRaw);
-        console.log(date);
-        return date;
+        return moment(new Date(dateRaw)).format('DD-MM-YYYY HH:mm');
     }
 
     function getSrcFeed(url) {
@@ -191,34 +187,50 @@ angular.module('rssReader').factory('dashboardService', ['addFeedService', '$fil
 
     function getCategorySidebar() {
         var listFeedSidebar = [];
+        var listWork = [];
+        var foundElem;
 
-        if (listFeeds.length) {
-            listFeeds.forEach(function(elem, index) {
-                listFeedSidebar.push({
-                    category: elem.feedCategory,
-                    id: index,
-                    titleFeeds: [elem.feedTitle]
+        if (!listFeeds.length) {
+            return false;
+        } else {
+            listFeeds.forEach(function(element, index) {
+                listWork.push({
+                    feedCategory: element.feedCategory,
+                    feedId: index,
+                    feedTitle: [element.feedTitle]
                 })
             });
         }
+
+        listWork.forEach(function(element, index) {
+
+            foundElem = listFeedSidebar.find(function(elem) {
+                return elem.feedCategory == element.feedCategory;
+            });
+
+            if (foundElem) {
+                foundElem.feedTitle = foundElem.feedTitle.concat(element.feedTitle);
+            } else {
+                listFeedSidebar.push(element);
+            }
+
+        });
+
+        console.log(listFeedSidebar);
         return listFeedSidebar;
     }
 
-
     function getArticles(category) {
         var articles;
-
         if (listFeeds.length) {
             articles = [];
-            listFeeds.forEach( function(elem) {
-                // console.log(elem.feedArticles);
-                elem.feedArticles.forEach( function(elem) {
+            listFeeds.forEach(function(elem) {
+                elem.feedArticles.forEach(function(elem) {
                     articles.push(elem)
                 });
             });
         }
         return articles;
-        // return listFeeds.length ? listFeeds[0].feedArticles : '';
     }
 
     return {

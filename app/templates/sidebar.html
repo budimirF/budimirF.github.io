@@ -1,10 +1,10 @@
 <div id="sidebarMenu" class="navmenu navmenu-default navmenu-fixed-left offcanvas-xs col-sm-2" role="navigation">
     <ul class="nav navmenu-nav">
         <li class=""><a ui-sref="dashboard"><span class="glyphicon glyphicon-align-justify"></span> All</a></li>
-        <li ng-repeat="list in listSidebar" ng-click="rotateChevron($event)">
-            <a data-toggle="collapse" data-target="#{{list.id}}"><span class="glyphicon glyphicon-chevron-right chevronRotate" ></span> {{list.category}}</a>
-            <ul id="{{list.id}}" class="collapse titleNews">
-                <li ng-repeat="titleFeeds in list.titleFeeds"><a href="#">{{titleFeeds}}</a></li>
+        <li ng-repeat="list in listFeedSidebar" ng-click="rotateChevron($event)">
+            <a data-toggle="collapse" data-target="#{{list.feedId}}"><span class="glyphicon glyphicon-chevron-right chevronRotate" ></span> {{list.feedCategory}}</a>
+            <ul id="{{list.feedId}}" class="collapse titleNews">
+                <li ng-repeat="titleFeed in list.feedTitle"><a href="#">{{titleFeed}}</a></li>
             </ul>
         </li>
     </ul>

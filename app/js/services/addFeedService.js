@@ -16,10 +16,7 @@ angular.module('rssReader').factory('addFeedService', ['$http', function($http) 
     }
 
     function getDate (dateRaw) {
-        console.log(dateRaw);
-        var date = new Date(dateRaw);
-        console.log(date);
-        return date;
+        return moment(new Date(dateRaw)).format('DD-MM-YYYY HH:mm');
     }
 
     function getSrcFeed(url) {
