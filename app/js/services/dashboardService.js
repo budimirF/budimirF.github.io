@@ -33,7 +33,6 @@ angular.module('rssReader').factory('dashboardService', ['addFeedService', '$fil
 
         });
 
-        console.log(listFeedSidebar);
         return listFeedSidebar;
     }
 
@@ -42,9 +41,7 @@ angular.module('rssReader').factory('dashboardService', ['addFeedService', '$fil
         if (listFeeds.length) {
             articles = [];
             listFeeds.forEach(function(elem) {
-                elem.feedArticles.forEach(function(elem) {
-                    articles.push(elem)
-                });
+                articles = articles.concat(elem.feedArticles);
             });
         }
         return articles;

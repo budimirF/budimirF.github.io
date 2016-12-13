@@ -96,11 +96,14 @@
 })();
 (function() {
     'use strict';
-    angular.module('rssReader').controller('sidebarController', ['$scope', '$state', 'dashboardService', function($scope, $state, dashboardService) {
-        $scope.getListCategory = function () {
-           $scope.listFeedSidebar = dashboardService.getCategorySidebar();
-           // console.log($scope.listSidebar);
-        } 
+    angular.module('rssReader').controller('sidebarController', ['$scope', '$rootScope', '$state', 'dashboardService', function($scope, $state, $rootScope, dashboardService) {
+        var getListSidebar = dashboardService.getCategorySidebar;
+        
+        $scope.$watch(function () {
+            return JSON.stringify(getListSidebar());
+        }, function () {
+            $scope.listFeedSidebar = getListSidebar();
+        });
 
         $scope.rotateChevron = function($event) {
             var chevronRigth = angular.element($event.target).children().hasClass('chevronRotate'),
@@ -216,7 +219,6 @@ angular.module('rssReader').factory('dashboardService', ['addFeedService', '$fil
 
         });
 
-        console.log(listFeedSidebar);
         return listFeedSidebar;
     }
 
@@ -225,9 +227,7 @@ angular.module('rssReader').factory('dashboardService', ['addFeedService', '$fil
         if (listFeeds.length) {
             articles = [];
             listFeeds.forEach(function(elem) {
-                elem.feedArticles.forEach(function(elem) {
-                    articles.push(elem)
-                });
+                articles = articles.concat(elem.feedArticles);
             });
         }
         return articles;
