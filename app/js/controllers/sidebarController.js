@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    angular.module('rssReader').controller('sidebarController', ['$scope', '$rootScope', '$state', 'dashboardService', function($scope, $state, $rootScope, dashboardService) {
+    angular.module('rssReader').controller('sidebarController', ['$scope', '$state', '$rootScope', 'dashboardService', function($scope, $state, $rootScope, dashboardService) {
         var getListSidebar = dashboardService.getCategorySidebar;
         
         $scope.$watch(function () {
@@ -9,16 +9,23 @@
             $scope.listFeedSidebar = getListSidebar();
         });
 
-        $scope.rotateChevron = function($event) {
-            var chevronRigth = angular.element($event.target).children().hasClass('chevronRotate'),
-                chevronDown = angular.element($event.target).children().hasClass('chevronRotated');
+        $scope.showArticlesBySorting = function (sorting) {
             
-            if (chevronRigth && !chevronDown) {
-                angular.element($event.target).children().addClass('chevronRotated');
+            // titleFeed = titleFeed ? titleFeed : null; 
+            // console.log('titleFeed = ' + titleFeed);
+            $state.go('dashboard.list-lg', {sort:sorting}); 
+        }
+
+        $scope.rotateChevron = function($event) {
+            var collapse = $event.currentTarget.attributes['aria-expanded'].value;
+            var chevron = angular.element($event.currentTarget).find('.glyphicon-chevron-right');
+            if (collapse == "false") {
+                chevron.addClass('chevronDown');
             } else {
-                angular.element($event.target).children().removeClass('chevronRotated');
+                chevron.removeClass('chevronDown');
             }
         }
+
     }]);
 
 })();

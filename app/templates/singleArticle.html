@@ -1,0 +1,47 @@
+<div class="readArticleWrapper col-lg-9">
+    <div>
+        <h2>{{article.title}}</h2>
+    </div>
+    <div class="imgWrapper img-responsive hidden-xs" ng-show="article.img" ng-style="{'background': 'url(' + article.img + ')'}">
+    </div>
+    <div class="content">{{article.content}}</div>
+    <div class="info">
+        <span class="fa fa-star-o fa-lg"></span>
+        <span class="fa fa-share-alt fa-lg"></span>
+        <span class="fa fa-clock-o"> {{article.date}}</span>
+    </div>
+    <div class="btnLink">
+        <a type="button" class="btn btn-primary" href="{{article.link}}" target="_blank">Read more</a>
+    </div>
+</div>
+<!-- <div class="col-lg-3 alsoArticles">
+    <h3>Also read</h3>
+    <div class="col-lg-12 col-md-3 col-xs-12 readArticleWrapper">
+        <div>
+            <strong>{{article.title}}</strong>
+        </div>
+        <div class="imgWrapper img-responsive" ng-show="article.img" ng-style="{'background': 'url(' + article.img + ')'}">
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-3 col-xs-12 readArticleWrapper">
+        <div>
+            <strong>{{article.title}}</strong>
+        </div>
+        <div class="imgWrapper img-responsive" ng-show="article.img" ng-style="{'background': 'url(' + article.img + ')'}">
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-3 col-xs-12 readArticleWrapper">
+        <div>
+            <strong>{{article.title}}</strong>
+        </div>
+        <div class="imgWrapper img-responsive" ng-show="article.img" ng-style="{'background': 'url(' + article.img + ')'}">
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-3 col-xs-12 readArticleWrapper">
+        <div>
+            <strong>{{article.title}}</strong>
+        </div>
+        <div class="imgWrapper img-responsive" ng-show="article.img" ng-style="{'background': 'url(' + article.img + ')'}">
+        </div>
+    </div> -->
+</div>

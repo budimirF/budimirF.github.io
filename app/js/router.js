@@ -30,10 +30,26 @@
                     }
                 }
             })
-            .state('dashboard.list-lg', {
-                url: '/list-lg',
+            .state('dashboard.table', {
+                url: '/list-table?sort',
                 templateUrl: 'templates/dashboardListLg.html',
-                controller: 'dashboardController'
+                controller: 'articlesController'
+            })
+            .state('dashboard.list-lg', {
+                url: '/list-lg?sort',
+                templateUrl: 'templates/dashboardListLg.html',
+                controller: 'articlesController'
+            })
+            .state('dashboard.list-th', {
+                url: '/list-th?sort',
+                templateUrl: 'templates/dashboardListLg.html',
+                controller: 'articlesController'
+            })
+            .state('dashboard.article', {
+                url: '/article?link',
+                templateUrl: 'templates/singleArticle.html',
+                controller: 'singleArticle',
+
             })
             .state('dashboard.add', {
                     url: '/add',

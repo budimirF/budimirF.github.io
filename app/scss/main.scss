@@ -1,7 +1,7 @@
 @import 'login';
 @import 'regestration';
-$borderColor: #e7e7e7;
-$backgroundColorNav: #f8f8f8; /*header, footer, sidebar*/
+$borderColor: #e7e7e7; 
+$backgroundColorNav: #f8f8f8;/*header, footer, sidebar*/
 @mixin bothAfter {
         content: "";
         display: block;
@@ -43,26 +43,57 @@ footer {
 
     padding-left: 0;
     padding-right: 0;
-    li a {
-        text-decoration: none;
-        color: black;
-        padding-left: 30px;
+    .view-btn-cat {
+        position: absolute;
+        right: 1em;
+        cursor: pointer;
+        visibility: hidden;
+        &:hover {
+            color: white;
+            transform: scale(1.1);
+        }
+    }
+    li {
+        line-height: 2em;
+        a {
+            text-decoration: none;
+            color: black;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            
+        }
+        
     }
 
     li {
         list-style: none; 
         cursor: pointer;
+        
+        :hover {
+            // color: #ffffff;
 
-        :hover,
-        :focus {
-            color: #ffffff;
             background-color: #337ab7;
+
+            .view-btn-cat { 
+                visibility: visible;
+            }
         }
     }
     .titleNews {
         li {
-            padding: 10px 5px;
+            line-height: 3em;
+            :hover {
+                border-right: 10px solid #6ca6cd;
+
+                a, span {
+                    border: none;
+                }
+            }
         }
+
+
     }
     div.btnAdd {
         padding-top: 40px;
@@ -234,14 +265,14 @@ footer {
 }
 
 
-.chevronRotated {
-    transform: rotate(90deg) !important;
-    transition: transform 0.35s linear;
+.chevronRight {
+    transform: rotate(0);
+    transition: transform 0.25s linear;
 }
 
-.chevronRotate {
-    transform: rotate(0);
-    transition: transform 0.35s linear;
+.chevronDown {
+    transform: rotate(90deg);
+    transition: transform 0.25s linear;
 }
 
 // add page
@@ -261,4 +292,69 @@ footer {
 
 .center {
     text-align: center;
+}
+
+// single page article
+.readArticleWrapper {
+    margin: 20px -10px 20px 10px;
+    padding: 1em;
+    border: none;
+    border-radius: 2px;
+    box-shadow: 1px 2px 5px 1px #888;
+
+    h2, .btnLink {
+        text-align: center;
+        margin-bottom: 1em;
+    }
+
+    .content,
+    .info,
+    .btnLink {
+        margin-top: 1em;
+    }
+
+    .imgWrapper {
+        margin: auto;
+        max-width: 640px;
+        height: 480px;
+        background-position-x: 50% !important; 
+        background-position-y: 50% !important;
+        background-size: cover !important;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    .info {
+        span {
+            &:nth-of-type(-1n+2) {
+                margin-left: 15px;
+                cursor: pointer;
+                &:hover {
+                    color: #ff9d00;
+                }
+            }
+            &:nth-last-of-type(1) {
+                float: right;
+                color: rgba(148, 137, 137, 0.78);
+            }
+        }
+    }
+
+}
+.alsoArticles {
+    margin-left: -10px;
+    padding-left: 10px;
+    .readArticleWrapper {
+        margin: 5px 5px 0 5px ;
+    }
+
+    h3 {
+        padding-left: 10px;
+    }
+    .imgWrapper {
+        max-width: 225px;
+        height: 175px;
+    }
 }

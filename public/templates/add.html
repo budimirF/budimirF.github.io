@@ -1,0 +1,46 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 center">
+            <h2>New Feed</h2>
+        </div>
+    </div>
+    <div class="row form-wrapper">
+        <div class="col-sm-offset-1 col-sm-10 col-lg-offset-3 col-lg-6">
+            <form ng-submit="getFeed()">
+                <div class="form-group row">
+                    <label for="url" class="col-sm-3 col-form-label">Url</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="url" id="url" ng-model="feedUrl" placeholder="Enter url">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="category" class="col-sm-3 col-form-label">Category</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" type="color" id="category" ng-model="feedCategory">
+                            <option value="" disabled="" selected="selected" class="" hidden="">Choose</option>
+                            <option label="News" value="News">News</option>
+                            <option label="IT" value="IT">IT</option>
+                            <option label="Sport" value="Sport">Sport</option>
+                            <option label="Design" value="Design">Design</option>
+                            <option label="Movies" value="Movies">Movies</option>
+                            <option label="Music" value="Music">Music</option>
+                            <option label="Culture" value="Culture">Culture</option>
+                            <option label="Nature" value="Nature">Nature</option>
+                            <option label="Gaming" value="Gaming">Gaming</option>
+                            <option label="Food" value="Food">Food</option>
+                            <option label="Economics" value="Economics">Economics</option>
+                            <option label="Science" value="Science">Science</option>
+                            <option label="Job" value="Job">Job</option>
+                            <option label="Custom" value="Custom">Custom</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- <div class="form-group row"> -->
+                    <div class="col-sm-12 col-lg-offset-1 col-lg-11 center">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                <!-- </div> -->
+            </form>
+        </div>
+    </div>
+</div>

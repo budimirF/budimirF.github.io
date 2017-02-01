@@ -1,6 +1,7 @@
 angular.module('rssReader').factory('dashboardService', ['addFeedService', '$filter', function(addFeedService, $filter) {
     'use strict';
     var listFeeds = addFeedService.getSavedFeeds();
+    var sortParam; //sorting option got from sidebar
 
     function getCategorySidebar() {
         var listFeedSidebar = [];
@@ -30,25 +31,64 @@ angular.module('rssReader').factory('dashboardService', ['addFeedService', '$fil
             } else {
                 listFeedSidebar.push(element);
             }
-
         });
-
         return listFeedSidebar;
     }
 
-    function getArticles(category) {
-        var articles;
+    function checkSorting(sorting, feed) {
+        if (sorting && sorting != "All") {
+            for (let key in feed) {
+                if (feed[key] == sorting) {
+                    articles = articles.concat(feed.feedArticles);
+                }
+            }
+        } else {
+            articles = articles.concat(feed.feedArticles);
+        }
+    }
+
+
+    function getArticles(sorting) {
+        sortParam = sorting;
+        var articles = [];
         if (listFeeds.length) {
-            articles = [];
             listFeeds.forEach(function(elem) {
-                articles = articles.concat(elem.feedArticles);
+                if (sorting && sorting != "All") {
+                    for (let key in elem) {
+                        if (elem[key] == sorting) {
+                            articles = articles.concat(elem.feedArticles);
+                        }
+                    }
+                } else {
+                    articles = articles.concat(elem.feedArticles);
+                }
             });
         }
+        console.log(articles);
         return articles;
+    }
+
+    function getSingleArticle(link) {
+        var articles = getArticles();
+        if (!articles) {
+            return false;
+        }
+        return articles.find(function(elem) {
+            return elem.link == link;
+        })
+    }
+
+    function getSortParam() {
+        if (!sortParam) {
+            sortParam = "All";
+        }
+        return sortParam;
     }
 
     return {
         getArticles: getArticles,
-        getCategorySidebar: getCategorySidebar
+        getCategorySidebar: getCategorySidebar,
+        getSingleArticle: getSingleArticle,
+        getSortParam: getSortParam
     }
 }]);
