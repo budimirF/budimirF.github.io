@@ -1,19 +1,19 @@
 var mongoose = require('mongoose'),
-	fs = require("fs"),
-	FeedParser = require('feedparser'),
-    request    = require('request'),
-	Feed = mongoose.model('Feed');
+    fs = require("fs"),
+    FeedParser = require('feedparser'),
+    request = require('request'),
+    Feed = mongoose.model('Feed');
 
 module.exports.getParsedFeed = function(req, res) {
-	var parsedFeed = [];
+    var parsedFeed = [];
     var req = request(req.body.url);
-    var feedparser = new FeedParser({ normalize : true, addmeta: true  });
+    var feedparser = new FeedParser({ normalize: true, addmeta: true });
 
-    req.on('error', function (error) {
+    req.on('error', function(error) {
         console.log('Feed xml req error')
     });
 
-    req.on('response', function (res) {
+    req.on('response', function(res) {
         var stream = this;
 
         if (res.statusCode !== 200) {
@@ -23,20 +23,20 @@ module.exports.getParsedFeed = function(req, res) {
         }
     });
 
-    feedparser.on('error', function (error) {
+    feedparser.on('error', function(error) {
         console.log("FeedParser error");
     });
 
-    feedparser.on('readable', function () {
+    feedparser.on('readable', function() {
         var stream = this,
-        meta = this.meta,
-        item;
+            meta = this.meta,
+            item;
         while (item = stream.read()) {
             parsedFeed.push(item);
             return parsedFeed;
         }
         res.send({
-			feed: parsedFeed
+            feed: parsedFeed
         });
     });
 }
@@ -44,10 +44,11 @@ module.exports.getParsedFeed = function(req, res) {
 module.exports.addFeed = function(req, res) {
     console.log(req.body.feedTitle)
     Feed.findOne({ feedTitle: req.body.feedTitle }, function(error, feed) {
-        if(feed) {
+        if (feed) {
             return res.send({
-                feed: feed
-            })
+                    duplicate: true
+                })
+                // res.json(feed); 
         } else {
             var feed = new Feed();
             feed.feedTitle = req.body.feedTitle;
@@ -55,14 +56,25 @@ module.exports.addFeed = function(req, res) {
             feed.feedCategory = req.body.feedCategory;
             // feed.markModified('cat'); 
             feed.markModified('feedArticles');
-            feed.save(function(err){
-				if (err) {
-					res.send({
-						err: "Error"
-					})
-				}
-				res.json(feed);
-			});
+            feed.save(function(err) {
+                if (err) {
+                    res.send({
+                        err: "Error"
+                    })
+                }
+                res.json(feed);
+            });
         }
     });
+}
+module.exports.getFeed = function(req, res) {
+    Feed.find({}, function(error, feed) {
+        if (feed) {
+                res.json(feed); 
+        } else {
+                res.send({
+                    err: "Error"
+                })
+        }
+    })
 }

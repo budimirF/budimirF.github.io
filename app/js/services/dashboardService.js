@@ -1,4 +1,4 @@
-angular.module('rssReader').factory('dashboardService', ['addFeedService', '$filter', function(addFeedService, $filter) {
+angular.module('rssReader').factory('dashboardService', ['addFeedService', '$filter', '$http', function(addFeedService, $filter, $http) {
     'use strict';
     var listFeeds = addFeedService.getSavedFeeds();
     var sortParam; //sorting option got from sidebar
@@ -85,10 +85,22 @@ angular.module('rssReader').factory('dashboardService', ['addFeedService', '$fil
         return sortParam;
     }
 
+    function getFeed () {
+        return $http.post('/getFeed')
+            .then(function(res) {
+                console.log("response in getFeed: ", res);
+                return res;
+            },
+            function(error) {
+                console.log('Can not get saved feed');
+            })
+    }
+
     return {
         getArticles: getArticles,
         getCategorySidebar: getCategorySidebar,
         getSingleArticle: getSingleArticle,
-        getSortParam: getSortParam
+        getSortParam: getSortParam,
+        getFeed: getFeed
     }
 }]);

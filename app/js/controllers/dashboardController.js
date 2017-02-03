@@ -25,6 +25,10 @@
             return (!re.test($state.current.name));
         }
 
+        $scope.getAllFeed = function () {
+            dashboardService.getFeed();
+        }
+
     }]);
 
 })();
