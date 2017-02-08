@@ -5,7 +5,7 @@ angular.module('rssReader').factory('addFeedService', ['$http', function($http) 
         return $http.post('/addFeed', {feedArticles: feed.feedArticles, feedTitle: feed.feedTitle, feedCategory: feed.feedCategory })
             .then(function(res) {
                 console.log("response in getSavedFeed: ", res);
-                listFeeds.push(res.data)
+                // listFeeds.push(res.data)
                 return res;
             },
             function(error) {
@@ -64,14 +64,14 @@ angular.module('rssReader').factory('addFeedService', ['$http', function($http) 
         }
     }
 
-    function getSavedFeeds() {
-        return listFeeds;
-    }
+    // function getSavedFeeds() {
+    //     return listFeeds;
+    // }
 
     return {
         getSrcFeed: getSrcFeed,
         getParsedFeed: getParsedFeed,
         saveData: saveData,
-        getSavedFeeds: getSavedFeeds
+        // getSavedFeeds: getSavedFeeds
     }
 }]);

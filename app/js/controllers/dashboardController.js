@@ -1,7 +1,7 @@
 (function() {
     'use strict';
-    angular.module('rssReader').controller('dashboardController', ['$scope', '$state', 'addFeedService', 'dashboardService', function($scope, $state, addFeedService, dashboardService) {
-        $scope.articles = dashboardService.getArticles();
+    angular.module('rssReader').controller('dashboardController', ['$scope', '$state', 'addFeedService', 'dashboardService', 'allFeed', function($scope, $state, addFeedService, dashboardService, allFeed) {
+        $scope.articles = dashboardService.getArticles(allFeed.data);
         // console.log(!!$scope.articles.length);
         
         $scope.$watch(function () {

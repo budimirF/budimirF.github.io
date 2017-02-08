@@ -28,6 +28,11 @@
                         templateUrl: 'templates/sidebar.html',
                         controller: 'sidebarController'
                     }
+                },
+                resolve: {
+                    allFeed : ['dashboardService', function (dashboardService) {
+                        return dashboardService.getFeed();
+                    }]
                 }
             })
             .state('dashboard.table', {

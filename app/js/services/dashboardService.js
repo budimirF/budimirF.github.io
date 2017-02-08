@@ -1,6 +1,6 @@
 angular.module('rssReader').factory('dashboardService', ['addFeedService', '$filter', '$http', function(addFeedService, $filter, $http) {
     'use strict';
-    var listFeeds = addFeedService.getSavedFeeds();
+    var listFeeds = [];
     var sortParam; //sorting option got from sidebar
 
     function getCategorySidebar() {
@@ -13,8 +13,9 @@ angular.module('rssReader').factory('dashboardService', ['addFeedService', '$fil
         } else {
             listFeeds.forEach(function(element, index) {
                 listWork.push({
+                    feedId : element._id,
                     feedCategory: element.feedCategory,
-                    feedId: index,
+                    id: index,
                     feedTitle: [element.feedTitle]
                 })
             });
@@ -35,36 +36,14 @@ angular.module('rssReader').factory('dashboardService', ['addFeedService', '$fil
         return listFeedSidebar;
     }
 
-    function checkSorting(sorting, feed) {
-        if (sorting && sorting != "All") {
-            for (let key in feed) {
-                if (feed[key] == sorting) {
-                    articles = articles.concat(feed.feedArticles);
-                }
-            }
-        } else {
-            articles = articles.concat(feed.feedArticles);
-        }
-    }
-
-
-    function getArticles(sorting) {
-        sortParam = sorting;
+    function getArticles(allFeed) {
         var articles = [];
         if (listFeeds.length) {
             listFeeds.forEach(function(elem) {
-                if (sorting && sorting != "All") {
-                    for (let key in elem) {
-                        if (elem[key] == sorting) {
-                            articles = articles.concat(elem.feedArticles);
-                        }
-                    }
-                } else {
                     articles = articles.concat(elem.feedArticles);
-                }
             });
         }
-        console.log(articles);
+        // console.log(articles);
         return articles;
     }
 
@@ -88,7 +67,7 @@ angular.module('rssReader').factory('dashboardService', ['addFeedService', '$fil
     function getFeed () {
         return $http.post('/getFeed')
             .then(function(res) {
-                console.log("response in getFeed: ", res);
+                listFeeds = res.data;
                 return res;
             },
             function(error) {

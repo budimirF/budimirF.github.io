@@ -5,11 +5,11 @@
         $scope.getFeed = function () {
             addFeedService.getSrcFeed($scope.feedUrl).then(function(res) {
                 var feed = addFeedService.getParsedFeed(res, $scope.feedCategory);
-                addFeedService.saveData(feed);
-                $state.go('dashboard.list-lg');
+                addFeedService.saveData(feed).then(function (res) {
+                    $state.go('dashboard.list-lg', {sort:res.data._id});
+                });
             });
         }
-        
     }]);
 
 })();

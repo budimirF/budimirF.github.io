@@ -8,7 +8,7 @@
         }, function () {
             $scope.listFeedSidebar = getListSidebar();
         });
-
+        
         $scope.showArticlesBySorting = function (sorting) {
             
             // titleFeed = titleFeed ? titleFeed : null; 
