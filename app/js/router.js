@@ -20,18 +20,24 @@
                         templateUrl: 'templates/dashboard.html',
                         controller: 'dashboardController'
                     },
-                    'head@dashboard' : {
+                    'head@dashboard': {
                         templateUrl: 'templates/dashboardHead.html',
                         controller: 'dashboardController'
                     },
-                    'sidebar' : {
+                    'sidebar': {
                         templateUrl: 'templates/sidebar.html',
                         controller: 'sidebarController'
                     }
                 },
                 resolve: {
-                    allFeed : ['dashboardService', function (dashboardService) {
-                        return dashboardService.getFeed();
+                    allFeed: ['dashboardService', function(dashboardService) {
+                        return dashboardService.getFeed().then(function(res) {
+                            // return dashboardService.getFeedFromFeedparser(res.data.feedLink).then(function(res) {
+                                console.log('resolve', res);
+                                    return res;
+                                // })
+                                // console.log(res);
+                        });
                     }]
                 }
             })
@@ -57,9 +63,9 @@
 
             })
             .state('dashboard.add', {
-                    url: '/add',
-                    templateUrl: 'templates/add.html',
-                    controller: 'addController'
+                url: '/add',
+                templateUrl: 'templates/add.html',
+                controller: 'addController'
             });
     }]);
 })();

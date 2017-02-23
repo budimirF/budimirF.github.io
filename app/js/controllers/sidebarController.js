@@ -1,16 +1,20 @@
 (function() {
     'use strict';
-    angular.module('rssReader').controller('sidebarController', ['$scope', '$state', '$rootScope', 'dashboardService', function($scope, $state, $rootScope, dashboardService) {
-        var getListSidebar = dashboardService.getCategorySidebar;
+    angular.module('rssReader').controller('sidebarController', ['$scope', '$state', '$rootScope', 'sidebarService', 'dashboardService', function($scope, $state, $rootScope, sidebarService, dashboardService) {
+        // var getListSidebar = dashboardService.getCategorySidebar;
+        var getListSidebar = sidebarService.getCategorySidebar;
+        var listFeeds = [];
         
         $scope.$watch(function () {
-            return JSON.stringify(getListSidebar());
+            // return JSON.stringify(getListSidebar());
+            listFeeds = dashboardService.getListFeeds();
+            return listFeeds;
         }, function () {
-            $scope.listFeedSidebar = getListSidebar();
+            $scope.listFeedSidebar = getListSidebar(listFeeds);
         });
         
         $scope.showArticlesBySorting = function (sorting) {
-            
+            // console.log(sorting);
             // titleFeed = titleFeed ? titleFeed : null; 
             // console.log('titleFeed = ' + titleFeed);
             $state.go('dashboard.list-lg', {sort:sorting}); 

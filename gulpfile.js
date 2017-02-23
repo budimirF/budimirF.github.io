@@ -39,9 +39,6 @@ gulp.task('sass', function() {
 });
 
 gulp.task('scripts', function() {
-      var options = {
-    preserveComments: 'license'
-  };
     return gulp.src('app/js/**/*.js', '!app/js/lib/*.*')
         .pipe(sourcemaps.init())
         .pipe(concat('app.js'))

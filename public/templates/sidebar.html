@@ -7,7 +7,7 @@
             
             <ul id="{{list.id}}" class="collapse titleNews">
                 <!-- <li ng-repeat="titleFeed in list.feedTitle"><a ui-sref="dashboard.list-lg"><span>{{titleFeed}}</span></a></li> -->
-                <li ng-repeat="titleFeed in list.feedTitle"><a ng-click="showArticlesBySorting(list.feedId)"><span>{{titleFeed}}</span></a></li>
+                <li ng-repeat="titleFeed in list.feedTitle"><a ng-click="showArticlesBySorting(titleFeed.feedId)"><span>{{titleFeed.feedTitle}}</span></a></li>
             </ul>
         </li>
     </ul>

@@ -42,8 +42,8 @@ module.exports.getParsedFeed = function(req, res) {
 }
 
 module.exports.addFeed = function(req, res) {
-    console.log(req.body.feedTitle)
-    Feed.findOne({ feedTitle: req.body.feedTitle }, function(error, feed) {
+    console.log(req.body.feedLink)
+    Feed.findOne({ feedLink: req.body.feedLink }, function(error, feed) {
         if (feed) {
             return res.send({
                     duplicate: true
@@ -51,11 +51,12 @@ module.exports.addFeed = function(req, res) {
                 // res.json(feed); 
         } else {
             var feed = new Feed();
+            feed.feedLink = req.body.feedLink;
             feed.feedTitle = req.body.feedTitle;
-            feed.feedArticles = req.body.feedArticles;
             feed.feedCategory = req.body.feedCategory;
+            // feed.feedArticles = req.body.feedArticles;
             // feed.markModified('cat'); 
-            feed.markModified('feedArticles');
+            // feed.markModified('feedArticles');
             feed.save(function(err) {
                 if (err) {
                     res.send({
@@ -70,11 +71,11 @@ module.exports.addFeed = function(req, res) {
 module.exports.getFeed = function(req, res) {
     Feed.find({}, function(error, feed) {
         if (feed) {
-                res.json(feed); 
+            res.json(feed);
         } else {
-                res.send({
-                    err: "Error"
-                })
+            res.send({
+                err: "Error"
+            })
         }
     })
 }

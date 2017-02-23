@@ -12,7 +12,7 @@ var express    = require('express'),
 	var routes = require('./server/routes/index');
 
 mongoose.Promise = global.Promise; 
-mongoose.connect(process.env.DB_URL || 'mongodb://admin:rimidub@ds139959.mlab.com:39959/rss-reader');
+mongoose.connect(process.env.DB_URL || 'mongodb://admin:rimidub@ds151289.mlab.com:51289/rss-reader');
 mongoose.connection.on('error', function(err) {
     console.log('Error: Could not connect to MongoDB');
 });

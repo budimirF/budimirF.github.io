@@ -1,11 +1,11 @@
 (function() {
     'use strict';
-    angular.module('rssReader').controller('addController', ['$scope', '$state', 'addFeedService',  function($scope, $state, addFeedService) {
+    angular.module('rssReader').controller('addController', ['$scope', '$state', 'addFeedService', 'dashboardService', function($scope, $state, addFeedService, dashboardService) {
         // $scope.feed = {};
         $scope.getFeed = function () {
-            addFeedService.getSrcFeed($scope.feedUrl).then(function(res) {
+            dashboardService.getFeedFromFeedparser($scope.feedUrl).then(function(res) {
                 var feed = addFeedService.getParsedFeed(res, $scope.feedCategory);
-                addFeedService.saveData(feed).then(function (res) {
+                addFeedService.saveFeed(feed, $scope.feedUrl).then(function (res) {
                     $state.go('dashboard.list-lg', {sort:res.data._id});
                 });
             });
