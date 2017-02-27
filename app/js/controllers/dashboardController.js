@@ -1,9 +1,7 @@
 (function() {
     'use strict';
-    angular.module('rssReader').controller('dashboardController', ['$scope', '$state', 'addFeedService', 'dashboardService', 'allFeed', function($scope, $state, addFeedService, dashboardService, allFeed) {
-        
-        $scope.articles = dashboardService.getArticles(allFeed.data);
-
+    angular.module('rssReader').controller('dashboardController', ['$scope', '$state', 'addFeedService', 'dashboardService', 'articles', function($scope, $state, addFeedService, dashboardService, articles) {
+        var parsedArticles = [];
         // console.log(!!$scope.articles.length);
         
         // $scope.$watch(function () {
@@ -12,14 +10,16 @@
         //     $scope.titleFeed = dashboardService.getSortParam();
         // });
 
+        parsedArticles = dashboardService.getParsedArticles(articles);
+        console.log(parsedArticles);
         $scope.readArticle = function (link) {
             $state.go('^.article', {link:link}); 
         }
 
-        if (!$scope.articles.length) {
+        if (!articles.length) {
             $state.go('dashboard.add');
         } else {
-            $state.go('dashboard.list-lg');
+            $state.go('dashboard.list-lg', {sort: 'All'});
         }
 
         $scope.isRead = function() {

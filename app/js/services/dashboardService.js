@@ -39,17 +39,33 @@ angular.module('rssReader').factory('dashboardService', ['addFeedService', '$fil
         return changedArticles;
     }
 
-    function getArticles(allFeed) {
-        console.log('getArticles');
-        console.log(allFeed);
-        var articles = [];
-        if (listFeeds.length) {
-            listFeeds.forEach(function(elem) {
-                articles = articles.concat(elem.feedArticles);
-            });
-        }
-        // console.log(articles);
-        return articles;
+    function getArticles(allFeeds) {
+        console.log('getArticles', arguments);
+        let articles = [];
+        let urls = allFeeds.map(function(element) {
+            return element.feedLink;
+        });
+
+        // return Promise.all(urls.map(getFeedFromFeedparser)).then(function(res) {
+        //     res.forEach(function(element) {
+        //         articles = articles.concat(element.feed);
+        //     });
+        //     return articles;
+        // });
+
+        let chain = Promise.resolve();
+        allFeeds.forEach( function(feed) {
+            chain = chain
+                .then(() => getFeedFromFeedparser(feed.feedLink))
+                .then((result) => {
+                    articles = articles.concat(result.feed);
+                });
+        });
+        
+        return chain.then(() => {
+            return articles
+        });       
+
     }
 
     function getSingleArticle(link) {
@@ -69,7 +85,7 @@ angular.module('rssReader').factory('dashboardService', ['addFeedService', '$fil
         return sortParam;
     }
 
-    function getFeed() {
+    function getAllFeeds() {
         return $http.post('/getFeed')
             .then(function(res) {
                     listFeeds = res.data;
@@ -89,7 +105,8 @@ angular.module('rssReader').factory('dashboardService', ['addFeedService', '$fil
         getFeedFromFeedparser: getFeedFromFeedparser,
         getSingleArticle: getSingleArticle,
         getSortParam: getSortParam,
-        getFeed: getFeed,
+        getAllFeeds: getAllFeeds,
+        getParsedArticles: getParsedArticles,
         getListFeeds: getListFeeds
     }
 }]);

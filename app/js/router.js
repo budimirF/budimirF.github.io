@@ -30,13 +30,12 @@
                     }
                 },
                 resolve: {
-                    allFeed: ['dashboardService', function(dashboardService) {
-                        return dashboardService.getFeed().then(function(res) {
-                            // return dashboardService.getFeedFromFeedparser(res.data.feedLink).then(function(res) {
-                                console.log('resolve', res);
+                    articles: ['dashboardService', function(dashboardService) {
+                        return dashboardService.getAllFeeds().then(function(res) {
+                            return dashboardService.getArticles(res.data).then(function(res) {
+                                    // console.log('resolve', res);
                                     return res;
-                                // })
-                                // console.log(res);
+                                });
                         });
                     }]
                 }
