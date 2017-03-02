@@ -6,5 +6,6 @@ var mongoose = require('mongoose'),
 router.post('/getParsedFeed', feedCtrl.getParsedFeed);
 router.post('/addFeed', feedCtrl.addFeed);
 router.post('/getFeed', feedCtrl.getFeed);
+router.post('/getFeedById', feedCtrl.getFeedById);
 
 module.exports = router;

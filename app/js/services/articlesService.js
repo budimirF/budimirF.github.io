@@ -17,13 +17,11 @@ angular.module('rssReader').factory('articlesService', ['$http', function($http)
 
     function getFeedFromFeedparser(url) {
         return $http.post('/getParsedFeed', { url: url }).then(function(response) {
-            // console.log(response.data);
             return response.data;
         });
     }
 
     function getAllArticles(allFeeds) {
-        // console.log('getAllArticles', arguments);
         let articles = [];
         let chain = Promise.resolve();
         allFeeds.forEach(function(feed) {
@@ -70,14 +68,25 @@ angular.module('rssReader').factory('articlesService', ['$http', function($http)
         allArticles = listFeeds;
     }
 
-        function getArticles() {
+    function getArticles() {
         return allArticles;
+    }
+
+    function getFeedById(id) {
+        return $http.post('/getFeedById', {feedId: id})
+               .then(function(res) {
+                    return getAllArticles([res.data]);
+                },
+                function(error) {
+                    console.log('Can not load data', error);
+                })
     }
 
     return {
         setAllArticles: setAllArticles,
         getAllArticles: getAllArticles,
         getArticles: getArticles,
-        getFeedFromFeedparser: getFeedFromFeedparser
+        getFeedFromFeedparser: getFeedFromFeedparser,
+        getFeedById: getFeedById
     }
 }]);

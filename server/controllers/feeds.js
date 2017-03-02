@@ -79,3 +79,17 @@ module.exports.getFeed = function(req, res) {
         }
     })
 }
+
+module.exports.getFeedById = function(req, res) {
+    Feed.findById({_id: req.body.feedId}, function(error, feed) {
+        if (feed) {
+            res.json(feed);
+        } else {
+            res.send({
+                err: "Error"
+            })
+        }
+    })
+}
+
+
