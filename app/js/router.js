@@ -30,12 +30,15 @@
                     }
                 },
                 resolve: {
-                    articles: ['dashboardService', function(dashboardService) {
+                    feeds: ['dashboardService', 'articlesService', 'sidebarService', function(dashboardService, articlesService, sidebarService) {
                         return dashboardService.getAllFeeds().then(function(res) {
-                            return dashboardService.getArticles(res.data).then(function(res) {
-                                    // console.log('resolve', res);
-                                    return res;
-                                });
+                            sidebarService.setListFeeds(res.data);
+                            return articlesService.getAllArticles(res.data).then(function(res) {
+                                articlesService.setAllArticles(res);
+                                return res;
+                            }, function(error) {
+                                console.log("Can't resolving", error);
+                            });
                         });
                     }]
                 }

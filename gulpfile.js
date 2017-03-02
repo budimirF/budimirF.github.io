@@ -56,7 +56,7 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('static', function() {
-    return gulp.src(['app/**/*.html', 'app/js/lib/*.*', 'app/fonts/*.*', 'app/css/*.*'], {since: gulp.lastRun('static')})
+    return gulp.src(['app/**/*.html', 'app/js/lib/*.*', 'app/fonts/*.*', 'app/css/*.*', 'app/img/*.*'], {since: gulp.lastRun('static')})
         .pipe(gulp.dest(function(file) {
             var base = file.base;
             return base.replace('app', 'public');

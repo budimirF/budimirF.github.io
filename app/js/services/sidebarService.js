@@ -1,5 +1,10 @@
 angular.module('rssReader').factory('sidebarService', ['dashboardService', function(dashboardService) {
-    var listFeeds = dashboardService.getListFeeds();
+    var listFeeds = [];
+
+
+    function setListFeeds (arr) {
+        listFeeds = listFeeds.concat(arr);
+    }
 
     function getCategorySidebar(listFeeds) {
         var listFeedSidebar = [];
@@ -11,10 +16,8 @@ angular.module('rssReader').factory('sidebarService', ['dashboardService', funct
         } else {
             listFeeds.forEach(function(element, index) {
                 listWork.push({
-                    // feedId: element._id,
                     feedCategory: element.feedCategory,
                     id: index,
-                    // feedTitle: [element.feedTitle] //change to array objects - > [{feedTitle: element.feedTitle, feedId: element._id}]
                     feedTitle: [{feedTitle: element.feedTitle, feedId: element._id}]
                 })
             });
@@ -34,7 +37,13 @@ angular.module('rssReader').factory('sidebarService', ['dashboardService', funct
         });
         return listFeedSidebar;
     }
+
+    function getListFeeds () {
+        return listFeeds;
+    }
     return {
-        getCategorySidebar: getCategorySidebar
+        getCategorySidebar: getCategorySidebar,
+        setListFeeds: setListFeeds,
+        getListFeeds: getListFeeds
     }
 }])

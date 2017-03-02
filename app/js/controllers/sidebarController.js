@@ -1,13 +1,12 @@
 (function() {
     'use strict';
     angular.module('rssReader').controller('sidebarController', ['$scope', '$state', '$rootScope', 'sidebarService', 'dashboardService', function($scope, $state, $rootScope, sidebarService, dashboardService) {
-        // var getListSidebar = dashboardService.getCategorySidebar;
         var getListSidebar = sidebarService.getCategorySidebar;
         var listFeeds = [];
         
         $scope.$watch(function () {
             // return JSON.stringify(getListSidebar());
-            listFeeds = dashboardService.getListFeeds();
+            listFeeds = sidebarService.getListFeeds();
             return listFeeds;
         }, function () {
             $scope.listFeedSidebar = getListSidebar(listFeeds);
