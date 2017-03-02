@@ -1,9 +1,19 @@
 angular.module('rssReader').factory('sidebarService', ['dashboardService', function(dashboardService) {
+    'use strict';
     var listFeeds = [];
 
 
-    function setListFeeds (arr) {
-        listFeeds = listFeeds.concat(arr);
+    function setListFeeds(arr) {
+
+        if (!listFeeds.length) {
+            listFeeds = listFeeds.concat(arr);
+        } else {
+            arr.forEach(element => {
+                if (!(listFeeds.some(currentElem => currentElem._id === element._id))) {
+                    listFeeds = listFeeds.concat(element);
+                }
+            });
+        }
     }
 
     function getCategorySidebar(listFeeds) {
@@ -18,7 +28,7 @@ angular.module('rssReader').factory('sidebarService', ['dashboardService', funct
                 listWork.push({
                     feedCategory: element.feedCategory,
                     id: index,
-                    feedTitle: [{feedTitle: element.feedTitle, feedId: element._id}]
+                    feedTitle: [{ feedTitle: element.feedTitle, feedId: element._id }]
                 })
             });
         }
@@ -38,7 +48,7 @@ angular.module('rssReader').factory('sidebarService', ['dashboardService', funct
         return listFeedSidebar;
     }
 
-    function getListFeeds () {
+    function getListFeeds() {
         return listFeeds;
     }
     return {
