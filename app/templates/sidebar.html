@@ -1,13 +1,13 @@
 <div id="sidebarMenu" class="navmenu navmenu-default navmenu-fixed-left offcanvas-xs col-sm-2" role="navigation">
     <ul class="nav navmenu-nav">
-        <li class=""><a ng-show="listFeedSidebar" ng-click="showArticlesBySorting('All')"><span class="glyphicon glyphicon-align-justify"></span> All</a></li>
+        <li class=""><a ng-show="listFeedSidebar" ng-click="showArticlesBySorting('category', 'All')"><span class="glyphicon glyphicon-align-justify"></span> All</a></li>
         <li ng-repeat="list in listFeedSidebar">
         <div></div>
-            <a data-toggle="collapse" data-target="#{{list.id}}" aria-expanded="false" ng-click="rotateChevron($event)"><span class="glyphicon glyphicon-chevron-right chevronRight" ></span> {{list.feedCategory}}<span class="view-btn-cat" ng-click="showArticlesBySorting(list.feedCategory)">view</span></a>
+            <a data-toggle="collapse" data-target="#{{list.id}}" aria-expanded="false" ng-click="rotateChevron($event)"><span class="glyphicon glyphicon-chevron-right chevronRight" ></span> {{list.feedCategory}}<span class="view-btn-cat" ng-click="showArticlesBySorting('category', list.feedCategory)">view</span></a>
             
             <ul id="{{list.id}}" class="collapse titleNews">
                 <!-- <li ng-repeat="titleFeed in list.feedTitle"><a ui-sref="dashboard.list-lg"><span>{{titleFeed}}</span></a></li> -->
-                <li ng-repeat="titleFeed in list.feedTitle"><a ng-click="showArticlesBySorting(titleFeed.feedId)"><span>{{titleFeed.feedTitle}}</span></a></li>
+                <li ng-repeat="titleFeed in list.feedTitle"><a ng-click="showArticlesBySorting('id', titleFeed.feedId)"><span>{{titleFeed.feedTitle}}</span></a></li>
             </ul>
         </li>
     </ul>

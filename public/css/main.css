@@ -134,6 +134,7 @@ footer {
   #sidebarMenu li {
     line-height: 2em; }
     #sidebarMenu li a {
+      padding-right: 17px;
       text-decoration: none;
       color: black;
       display: block;
@@ -151,7 +152,8 @@ footer {
     line-height: 3em; }
     #sidebarMenu .titleNews li :hover {
       border-right: 10px solid #6ca6cd; }
-      #sidebarMenu .titleNews li :hover a, #sidebarMenu .titleNews li :hover span {
+      #sidebarMenu .titleNews li :hover a,
+      #sidebarMenu .titleNews li :hover span {
         border: none; }
   #sidebarMenu div.btnAdd {
     padding-top: 40px;
@@ -213,7 +215,9 @@ footer {
 .index-wrapper,
 .add-wrapper {
   margin-top: 100px; }
-  .index-wrapper h1, .index-wrapper h3, .index-wrapper .successBtn,
+  .index-wrapper h1,
+  .index-wrapper h3,
+  .index-wrapper .successBtn,
   .add-wrapper h1,
   .add-wrapper h3,
   .add-wrapper .successBtn {
@@ -232,8 +236,27 @@ footer {
 
 .contentBody {
   padding: 10px; }
-  .contentBody .feedTable {
+  .contentBody .feed {
     padding: 10px; }
+  .contentBody .articleTitle {
+    padding-top: 10px;
+    height: 40px;
+    margin-bottom: 10px; }
+  .contentBody .articleDescription {
+    height: 70px;
+    margin-bottom: 1.1em;
+    overflow: hidden; }
+  .contentBody .favouriteMark {
+    border-color: transparent #ff9d00 transparent transparent;
+    border-style: solid;
+    border-width: 0 30px 30px 0;
+    height: 0;
+    left: 100%;
+    margin-left: 8px;
+    position: absolute;
+    -webkit-transform: translateX(-125%);
+            transform: translateX(-125%);
+    width: 0; }
   .contentBody .article {
     height: 200px;
     margin-bottom: 20px;
@@ -244,24 +267,6 @@ footer {
     -webkit-transition: all .2s ease;
     transition: all .2s ease;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
-    .contentBody .article:hover {
-      border: none;
-      -webkit-transition: all .2s ease;
-      transition: all .2s ease;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); }
-      .contentBody .article:hover .footerArticle button {
-        visibility: visible !important; }
-    .contentBody .article .favouriteMark {
-      border-color: transparent #ff9d00 transparent transparent;
-      border-style: solid;
-      border-width: 0 30px 30px 0;
-      height: 0;
-      left: 100%;
-      margin-left: 8px;
-      position: absolute;
-      -webkit-transform: translateX(-125%);
-              transform: translateX(-125%);
-      width: 0; }
     .contentBody .article .imgWrapper {
       width: 256px;
       height: 100%;
@@ -271,14 +276,6 @@ footer {
       background-position-y: 50% !important;
       background-size: cover !important;
       border-radius: 2px 0 0 2px; }
-    .contentBody .article .articleTitle {
-      padding-top: 10px;
-      height: 40px;
-      margin-bottom: 10px; }
-    .contentBody .article .articleDescription {
-      height: 70px;
-      margin-bottom: 1.1em;
-      overflow: hidden; }
     .contentBody .article .articleTitle,
     .contentBody .article .articleDescription,
     .contentBody .article .footerArticle {
@@ -294,15 +291,44 @@ footer {
       margin-top: 10px;
       float: right;
       color: rgba(148, 137, 137, 0.78); }
-  .contentBody::after {
-    content: "";
-    display: block;
-    clear: both; }
-
-.feedTable::after {
-  content: "";
-  display: block;
-  clear: both; }
+    .contentBody .article:hover {
+      border: none;
+      -webkit-transition: all .2s ease;
+      transition: all .2s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); }
+      .contentBody .article:hover .footerArticle button {
+        visibility: visible; }
+  .contentBody .articleList {
+    height: 100px;
+    margin: 0;
+    margin-right: 0;
+    border-top: 1px solid; }
+    .contentBody .articleList .articleTitle {
+      margin: 0; }
+    .contentBody .articleList .articleDescription {
+      height: 40px;
+      margin-bottom: 1.1em;
+      overflow: hidden;
+      width: 95%;
+      float: left; }
+    .contentBody .articleList .articleRightSide {
+      float: right; }
+    .contentBody .articleList:hover {
+      cursor: pointer;
+      background-color: #e6e6e6; }
+    .contentBody .articleList .articleRightSide span {
+      cursor: pointer;
+      display: block; }
+      .contentBody .articleList .articleRightSide span:nth-child(1) {
+        margin-bottom: 10px; }
+      .contentBody .articleList .articleRightSide span:hover {
+        color: #ff9d00; }
+    .contentBody .articleList:nth-last-child(1) {
+      border-bottom: 1px solid; }
+    .contentBody .articleList::after {
+      content: "";
+      display: block;
+      clear: both; }
 
 .sort-list {
   left: 135px; }
@@ -342,7 +368,8 @@ footer {
   border: none;
   border-radius: 2px;
   box-shadow: 1px 2px 5px 1px #888; }
-  .readArticleWrapper h2, .readArticleWrapper .btnLink {
+  .readArticleWrapper h2,
+  .readArticleWrapper .btnLink {
     text-align: center;
     margin-bottom: 1em; }
   .readArticleWrapper .content,

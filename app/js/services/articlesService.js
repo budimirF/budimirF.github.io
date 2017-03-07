@@ -1,6 +1,6 @@
 angular.module('rssReader').factory('articlesService', ['$http', function($http) {
     'use strict';
-    var allArticles = [];
+    // var allArticles = [];
 
     function getText(html) {
         return angular.element(`<div>${html}</div>`).text().replace(/\n+/g, ' ');
@@ -11,24 +11,20 @@ angular.module('rssReader').factory('articlesService', ['$http', function($http)
         return imgElem ? imgElem.src : '';
     }
 
-    function getDate(dateRaw) {
-        return moment(new Date(dateRaw)).format('DD-MM-YYYY HH:mm');
-    }
-
     function getFeedFromFeedparser(url) {
         return $http.post('/getParsedFeed', { url: url }).then(function(response) {
             return response.data;
         });
     }
 
-    function getAllArticles(allFeeds) {
+    function getArticles(feeds) {
         let articles = [];
         let chain = Promise.resolve();
-        allFeeds.forEach(function(feed) {
+        feeds.forEach(function(feed) {
             chain = chain
                 .then(() => getFeedFromFeedparser(feed.feedLink))
                 .then((result) => {
-                    result = getParsedArticles(result.feed, feed.feedCategory);
+                    result = getParsedArticles(result.feed, feed.feedCategory, feed._id);
                     articles = articles.concat(result);
                 });
         });
@@ -39,43 +35,61 @@ angular.module('rssReader').factory('articlesService', ['$http', function($http)
 
     }
 
-    function getParsedArticles(articles, category) {
+    function getParsedArticles(articles, category, feedId) {
+        // console.log('getParsedArticles', articles);
         var changedArticles = [];
         articles.forEach(function(el) {
+            
             changedArticles.push({
                 title: el.title,
+                feedId: feedId,
                 category: category,
                 content: getText(el.description),
                 img: getImgUrl(el.description),
-                link: el.permalink,
+                link: el.link,
                 date: el.pubDate
             })
         });
         return changedArticles;
     }
 
-    function getSingleArticle(link) {
-        var articles = getAllArticles();
-        if (!articles) {
-            return false;
-        }
-        return articles.find(function(elem) {
-            return elem.link == link;
+    function getSingleArticle(feedId, link) {
+        return getFeedById(feedId).then(function(res) {
+            return res.find(function(elem) {
+                if (elem.link == link) {
+                    return elem;
+                }
+            })
         })
     }
 
-    function setAllArticles(listFeeds) {
-        allArticles = listFeeds;
-    }
+    function getAllFeeds() {
+        return $http.post('/getFeed')
+            .then(function(res) {
+                    return getArticles(res.data)
+                        // return res;
 
-    function getArticles() {
-        return allArticles;
+                },
+                function(error) {
+                    console.log('Can not get saved feed');
+                })
     }
 
     function getFeedById(id) {
-        return $http.post('/getFeedById', {feedId: id})
-               .then(function(res) {
-                    return getAllArticles([res.data]);
+        return $http.post('/getFeedById', { feedId: id })
+            .then(function(res) {
+                    return getArticles([res.data]);
+                },
+                function(error) {
+                    console.log('Can not load data', error);
+                })
+    }
+
+    function getFeedByCat(category) {
+        return $http.post('/getFeedByCat', { feedCategory: category })
+            .then(function(res) {
+                    // console.log('getFeedByCat', res.data);
+                    return getArticles(res.data);
                 },
                 function(error) {
                     console.log('Can not load data', error);
@@ -83,10 +97,13 @@ angular.module('rssReader').factory('articlesService', ['$http', function($http)
     }
 
     return {
-        setAllArticles: setAllArticles,
-        getAllArticles: getAllArticles,
+        // setAllArticles: setAllArticles,
+        // getAllArticles: getAllArticles,
         getArticles: getArticles,
         getFeedFromFeedparser: getFeedFromFeedparser,
-        getFeedById: getFeedById
+        getAllFeeds: getAllFeeds,
+        getFeedById: getFeedById,
+        getFeedByCat: getFeedByCat, 
+        getSingleArticle: getSingleArticle
     }
 }]);

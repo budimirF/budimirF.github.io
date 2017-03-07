@@ -42,13 +42,11 @@ module.exports.getParsedFeed = function(req, res) {
 }
 
 module.exports.addFeed = function(req, res) {
-    console.log(req.body.feedLink)
     Feed.findOne({ feedLink: req.body.feedLink }, function(error, feed) {
         if (feed) {
             return res.send({
                     duplicate: true
                 })
-                // res.json(feed); 
         } else {
             var feed = new Feed();
             feed.feedLink = req.body.feedLink;
@@ -82,6 +80,18 @@ module.exports.getFeed = function(req, res) {
 
 module.exports.getFeedById = function(req, res) {
     Feed.findById({_id: req.body.feedId}, function(error, feed) {
+        if (feed) {
+            res.json(feed);
+        } else {
+            res.send({
+                err: "Error"
+            })
+        }
+    })
+}
+module.exports.getFeedByCat = function(req, res) {
+    console.log(req.body);
+    Feed.find(req.body, function(error, feed) {
         if (feed) {
             res.json(feed);
         } else {

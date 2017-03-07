@@ -12,11 +12,11 @@
             $scope.listFeedSidebar = getListSidebar(listFeeds);
         });
         
-        $scope.showArticlesBySorting = function (sorting) {
+        $scope.showArticlesBySorting = function (type, value) {
             // console.log(sorting);
             // titleFeed = titleFeed ? titleFeed : null; 
             // console.log('titleFeed = ' + titleFeed);
-            $state.go('dashboard.list-lg', {sort:sorting}); 
+            $state.go('dashboard.list-lg', {type: type, value: value}); 
         }
 
         $scope.rotateChevron = function($event) {

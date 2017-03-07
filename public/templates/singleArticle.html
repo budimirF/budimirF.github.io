@@ -8,7 +8,7 @@
     <div class="info">
         <span class="fa fa-star-o fa-lg"></span>
         <span class="fa fa-share-alt fa-lg"></span>
-        <span class="fa fa-clock-o"> {{article.date}}</span>
+        <span class="fa fa-clock-o"> {{article.date | date : "HH:mm dd/MM/y" : "UTC"}}</span>
     </div>
     <div class="btnLink">
         <a type="button" class="btn btn-primary" href="{{article.link}}" target="_blank">Read more</a>

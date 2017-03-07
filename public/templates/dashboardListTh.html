@@ -1,22 +1,20 @@
 <div class="row list-lg" >
     <div class="contentBody">
         <div class="feed">
-            <div class="article col-lg-12" ng-repeat="article in articles">
-                <div class="favouriteMark-"></div>
-                <div class="imgWrapper img-responsive hidden-sm hidden-xs" ng-style="{'background': 'url(' + article.img + ')'}" ng-show="article.img">
-                </div>
+            <div class="articleList col-lg-12" ng-repeat="article in articles" ng-click="readArticle(article.feedId, article.link)">
+                <div class="favouriteMark"></div>
                 <div class="articleTitle">
                     <strong>{{article.title}}</strong>
                 </div>
                 <div class="articleDescription">
                     {{article.content}}
                 </div>
-                <div class="footerArticle">
+                <div class="articleRightSide">
                     <!-- <button class="btn btn-default" ui-sref="dashboard.article({param:article})">Read</button> -->
-                    <button class="btn btn-default" ng-click="readArticle(article.feedId, article.link)">Read</button>
+                    
                     <span class="fa fa-star-o fa-lg"></span>
+                    <!-- <br> -->
                     <span class="fa fa-share-alt fa-lg"></span>
-                    <span class="fa fa-clock-o"> {{article.date | date : "HH:mm dd/MM/y" : "UTC"}}</span>
                 </div>
             </div>
         </div>

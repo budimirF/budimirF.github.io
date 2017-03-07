@@ -7,7 +7,7 @@
                 var feed = addFeedService.getParsedFeed(res, $scope.feedCategory);
                 addFeedService.saveFeed(feed, $scope.feedUrl).then(function (res) {
                     sidebarService.setListFeeds([res.data]);
-                    $state.go('dashboard.list-lg', {sort:res.data._id});
+                    $state.go('dashboard.list-lg', {type: 'id', value:res.data._id});
                 });
             });
         }

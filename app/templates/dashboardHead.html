@@ -2,17 +2,17 @@
     <h2 ng-init="get()">{{titleFeed}}</h2>
     <div class="row">
         <div class="col-lg-11 col-xs-11">
-            <div class="btn-group" ui-sref-active="active">
-                <button type="button" class="btn btn-default glyphicon glyphicon-list"></button>
-                <button type="button" class="btn btn-default glyphicon glyphicon-th-list" ui-sref="dashboard.list-lg"></button>
-                <button type="button" class="btn btn-default glyphicon glyphicon-th-large"></button>
+            <div class="btn-group" >
+                <button type="button" class="btn btn-default glyphicon glyphicon-list"  ui-sref-active="active" ui-sref="dashboard.list-th"></button>
+                <button type="button" class="btn btn-default glyphicon glyphicon-th-list"  ui-sref-active="active" ui-sref="dashboard.list-lg"></button>
+                <button type="button" class="btn btn-default glyphicon glyphicon-th-large"  ui-sref-active="active"></button>
             </div>
             <button type="button" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">sort</button>
             <ul class="dropdown-menu sort-list">
                 <li><a href="#">Newest</a></li>
                 <li><a href="#">Oldest</a></li>
             </ul>
-            <button type="button" class="btn btn-default " type="button" ng-click="getAllFeed()">get feed</button>
+            <!-- <button type="button" class="btn btn-default " type="button" ng-click="getAllFeed()">get $state.params</button> -->
         </div>
     </div>
 </div>

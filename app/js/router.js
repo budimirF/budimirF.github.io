@@ -33,33 +33,35 @@
                     feeds: ['dashboardService', 'articlesService', 'sidebarService', function(dashboardService, articlesService, sidebarService) {
                         return dashboardService.getAllFeeds().then(function(res) {
                             sidebarService.setListFeeds(res.data);
-                            return articlesService.getAllArticles(res.data).then(function(res) {
-                                articlesService.setAllArticles(res);
-                                return res;
-                            }, function(error) {
-                                console.log("Can't resolving", error);
-                            });
+                            // return articlesService.getAllArticles(res.data).then(function(res) {
+                            //     articlesService.setAllArticles(res);
+                            //     return res;
+                            // }, function(error) {
+                            //     console.log("Can't resolving", error);
+                            // });
+                            // console.log('resolve', res.data);
+                            return res.data;
                         });
                     }]
                 }
             })
             .state('dashboard.table', {
-                url: '/list-table?sort',
+                url: '/list-table?type&value',
                 templateUrl: 'templates/dashboardListLg.html',
                 controller: 'articlesController'
             })
             .state('dashboard.list-lg', {
-                url: '/list-lg?sort',
+                url: '/list-lg?type&value',
                 templateUrl: 'templates/dashboardListLg.html',
                 controller: 'articlesController'
             })
             .state('dashboard.list-th', {
-                url: '/list-th?sort',
-                templateUrl: 'templates/dashboardListLg.html',
+                url: '/list-th?type&value',
+                templateUrl: 'templates/dashboardListTh.html',
                 controller: 'articlesController'
             })
             .state('dashboard.article', {
-                url: '/article?link',
+                url: '/article?feed&link',
                 templateUrl: 'templates/singleArticle.html',
                 controller: 'singleArticle',
 

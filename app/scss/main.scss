@@ -1,17 +1,21 @@
 @import 'login';
 @import 'regestration';
-$borderColor: #e7e7e7; 
-$backgroundColorNav: #f8f8f8;/*header, footer, sidebar*/
+$borderColor: #e7e7e7;
+$backgroundColorNav: #f8f8f8;
+
+/*header, footer, sidebar*/
+
 @mixin bothAfter {
-        content: "";
-        display: block;
-        clear: both;
+    content: "";
+    display: block;
+    clear: both;
 }
 
 html {
     position: relative;
     min-height: 100%;
 }
+
 body {
     margin-bottom: 100px;
     font-family: 'Roboto', sans-serif;
@@ -23,14 +27,14 @@ footer {
     bottom: 0;
     right: 0;
     left: 0;
-    height: 80px; 
+    height: 80px;
     padding: 30px 0;
     border: 1px solid transparent;
     background-color: $backgroundColorNav;
     border-color: $borderColor;
     z-index: 1000;
     p {
-    text-align: center;
+        text-align: center;
     }
 }
 
@@ -40,7 +44,6 @@ footer {
 }
 
 #sidebarMenu {
-
     padding-left: 0;
     padding-right: 0;
     .view-btn-cat {
@@ -55,28 +58,24 @@ footer {
     }
     li {
         line-height: 2em;
+
         a {
+            padding-right: 17px;
             text-decoration: none;
             color: black;
             display: block;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            
         }
-        
     }
-
     li {
-        list-style: none; 
+        list-style: none;
         cursor: pointer;
-        
         :hover {
             // color: #ffffff;
-
             background-color: #337ab7;
-
-            .view-btn-cat { 
+            .view-btn-cat {
                 visibility: visible;
             }
         }
@@ -84,16 +83,15 @@ footer {
     .titleNews {
         li {
             line-height: 3em;
+
             :hover {
                 border-right: 10px solid #6ca6cd;
-
-                a, span {
+                a,
+                span {
                     border: none;
                 }
             }
         }
-
-
     }
     div.btnAdd {
         padding-top: 40px;
@@ -105,23 +103,25 @@ footer {
 }
 
 .loader {
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  z-index:1000;
-  background-color: #EDF2F8;
-  opacity: .3;
-
-  img {
-    width: auto;
-    height: auto;
-    overflow: auto;
-    margin: auto;
     position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0;
-  }
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: #EDF2F8;
+    opacity: .3;
+    img {
+        width: auto;
+        height: auto;
+        overflow: auto;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
 }
 
 .offcanvas-xs.in {
@@ -131,10 +131,11 @@ footer {
     bottom: 0;
 }
 
-.navbar-header button:nth-of-type(1){
+.navbar-header button:nth-of-type(1) {
     float: left;
     margin-left: 10px;
 }
+
 .navbar-right .hidden-xs {
     margin-right: 30px;
 }
@@ -159,13 +160,15 @@ footer {
     margin-top: 51px;
     @media (min-width: 768px) {
         margin-left: 300px;
-        
     }
 }
+
 .index-wrapper,
 .add-wrapper {
     margin-top: 100px;
-    h1 , h3 , .successBtn {
+    h1,
+    h3,
+    .successBtn {
         text-align: center;
     }
     .successBtn {
@@ -187,10 +190,30 @@ footer {
 
 .contentBody {
     padding: 10px;
-    .feedTable {
+    .feed {
         padding: 10px;
     }
-
+    .articleTitle {
+        padding-top: 10px;
+        height: 40px;
+        margin-bottom: 10px;
+    }
+    .articleDescription {
+        height: 70px;
+        margin-bottom: 1.1em;
+        overflow: hidden;
+    }
+    .favouriteMark {
+        border-color: transparent #ff9d00 transparent transparent;
+        border-style: solid;
+        border-width: 0 30px 30px 0;
+        height: 0;
+        left: 100%;
+        margin-left: 8px;
+        position: absolute;
+        transform: translateX(-125%);
+        width: 0;
+    }
     .article {
         height: 200px;
         margin-bottom: 20px;
@@ -199,52 +222,20 @@ footer {
         border: none;
         border-radius: 2px;
         transition: all .2s ease;
-        box-shadow: 0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23);
-        
-        &:hover {
-            border: none;
-            transition: all .2s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            .footerArticle button {
-                visibility: visible !important;
-            }
-        }
-        .favouriteMark {
-            border-color: transparent #ff9d00 transparent transparent;
-            border-style: solid;
-            border-width: 0 30px 30px 0;
-            height: 0;
-            left: 100%;
-            margin-left: 8px;
-            position: absolute;
-            transform: translateX(-125%);
-            width: 0;
-        }
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23);
         .imgWrapper {
             width: 256px;
             height: 100%;
             float: left;
             margin-right: 20px;
-            background-position-x: 50% !important; 
+            background-position-x: 50% !important;
             background-position-y: 50% !important;
             background-size: cover !important;
             border-radius: 2px 0 0 2px;
-
-        }
-        .articleTitle {
-            padding-top: 10px;
-            height: 40px;
-            margin-bottom: 10px;
-        }
-        .articleDescription {
-            height: 70px;
-            margin-bottom: 1.1em;
-            overflow: hidden;
         }
         .articleTitle,
         .articleDescription,
         .footerArticle {
-    
             margin-left: 20px;
         }
         .footerArticle {
@@ -266,23 +257,71 @@ footer {
                 }
             }
         }
+        &:hover {
+            border: none;
+            transition: all .2s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            .footerArticle button {
+                visibility: visible;
+            }
+        }
     }
-
-    &::after {
-        @include bothAfter;
-    }
-}
-
-
-.feedTable {
+    .articleList {
+        height: 100px;
+        margin: 0;
+        margin-right: 0;
+        border-top: 1px solid;
+        .articleTitle {
+            margin: 0;
+        }
+        .articleDescription {
+            height: 40px;
+            margin-bottom: 1.1em;
+            overflow: hidden;
+            width: 95%;
+            float: left;
+        }
+        .articleRightSide {
+            float: right;
+        }
+        // .articleTitle {
+        //     padding-top: 10px;
+        //     height: 40px;
+        //     margin-bottom: 10px;
+        // }
+        &:hover {
+            cursor: pointer;
+            background-color: #e6e6e6;
+        }
+        .articleRightSide {
+            span {
+                cursor: pointer;
+                display: block;
+                &:nth-child(1) {
+                    margin-bottom: 10px;
+                }
+                &:hover {
+                    color: #ff9d00;
+                }
+            }
+        }
+        &:nth-last-child(1) {
+            border-bottom: 1px solid;
+        }
         &::after {
-        @include bothAfter;
+            @include bothAfter;
+        }
     }
 }
+
+// .feed {
+//     &::after {
+//         @include bothAfter;
+//     }
+// }
 .sort-list {
     left: 135px;
 }
-
 
 .chevronRight {
     transform: rotate(0);
@@ -301,8 +340,8 @@ footer {
     button {
         width: 150px;
     }
-
 }
+
 .form-wrapper {
     label {
         text-align: right;
@@ -320,31 +359,27 @@ footer {
     border: none;
     border-radius: 2px;
     box-shadow: 1px 2px 5px 1px #888;
-
-    h2, .btnLink {
+    h2,
+    .btnLink {
         text-align: center;
         margin-bottom: 1em;
     }
-
     .content,
     .info,
     .btnLink {
         margin-top: 1em;
     }
-
     .imgWrapper {
         margin: auto;
         max-width: 640px;
         height: 480px;
-        background-position-x: 50% !important; 
+        background-position-x: 50% !important;
         background-position-y: 50% !important;
         background-size: cover !important;
     }
-
     .content {
         padding: 20px;
     }
-
     .info {
         span {
             &:nth-of-type(-1n+2) {
@@ -360,15 +395,14 @@ footer {
             }
         }
     }
-
 }
+
 .alsoArticles {
     margin-left: -10px;
     padding-left: 10px;
     .readArticleWrapper {
-        margin: 5px 5px 0 5px ;
+        margin: 5px 5px 0 5px;
     }
-
     h3 {
         padding-left: 10px;
     }

@@ -1,10 +1,12 @@
 (function() {
     'use strict';
-    angular.module('rssReader').controller('singleArticle', ['$scope', '$state', '$stateParams', 'dashboardService', function($scope, $state, $stateParams, dashboardService) {
+    angular.module('rssReader').controller('singleArticle', ['$scope', '$state', '$stateParams', 'articlesService', function($scope, $state, $stateParams, articlesService) {
         if (!$stateParams.link) {
             $state.go('^');
         } else {
-            $scope.article = dashboardService.getSingleArticle($stateParams.link);
+            articlesService.getSingleArticle($stateParams.feed, $stateParams.link).then(function (res) {
+                $scope.article = res;
+            });
         }
         
 
