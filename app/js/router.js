@@ -11,7 +11,6 @@
             .state('login', {
                 url: '/login',
                 templateUrl: 'templates/login.html',
-                // controller: 'loginController'
             })
             .state('dashboard', {
                 url: '/dashboard',
@@ -31,15 +30,8 @@
                 },
                 resolve: {
                     feeds: ['dashboardService', 'articlesService', 'sidebarService', function(dashboardService, articlesService, sidebarService) {
-                        return dashboardService.getAllFeeds().then(function(res) {
+                        return articlesService.getAllFeeds().then(function(res) {
                             sidebarService.setListFeeds(res.data);
-                            // return articlesService.getAllArticles(res.data).then(function(res) {
-                            //     articlesService.setAllArticles(res);
-                            //     return res;
-                            // }, function(error) {
-                            //     console.log("Can't resolving", error);
-                            // });
-                            // console.log('resolve', res.data);
                             return res.data;
                         });
                     }]

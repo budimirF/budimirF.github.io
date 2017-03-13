@@ -5,7 +5,6 @@
         var listFeeds = [];
         
         $scope.$watch(function () {
-            // return JSON.stringify(getListSidebar());
             listFeeds = sidebarService.getListFeeds();
             return listFeeds;
         }, function () {
@@ -13,9 +12,6 @@
         });
         
         $scope.showArticlesBySorting = function (type, value) {
-            // console.log(sorting);
-            // titleFeed = titleFeed ? titleFeed : null; 
-            // console.log('titleFeed = ' + titleFeed);
             $state.go('dashboard.list-lg', {type: type, value: value}); 
         }
 

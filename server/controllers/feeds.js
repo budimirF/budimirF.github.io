@@ -52,9 +52,6 @@ module.exports.addFeed = function(req, res) {
             feed.feedLink = req.body.feedLink;
             feed.feedTitle = req.body.feedTitle;
             feed.feedCategory = req.body.feedCategory;
-            // feed.feedArticles = req.body.feedArticles;
-            // feed.markModified('cat'); 
-            // feed.markModified('feedArticles');
             feed.save(function(err) {
                 if (err) {
                     res.send({

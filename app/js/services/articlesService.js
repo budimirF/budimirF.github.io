@@ -1,6 +1,5 @@
-angular.module('rssReader').factory('articlesService', ['$http', function($http) {
+angular.module('rssReader').factory('articlesService', ['$http', 'dashboardService', function($http, dashboardService) {
     'use strict';
-    // var allArticles = [];
 
     function getText(html) {
         return angular.element(`<div>${html}</div>`).text().replace(/\n+/g, ' ');
@@ -28,15 +27,12 @@ angular.module('rssReader').factory('articlesService', ['$http', function($http)
                     articles = articles.concat(result);
                 });
         });
-
         return chain.then(() => {
             return articles
         });
-
     }
 
     function getParsedArticles(articles, category, feedId) {
-        // console.log('getParsedArticles', articles);
         var changedArticles = [];
         articles.forEach(function(el) {
             
@@ -66,18 +62,24 @@ angular.module('rssReader').factory('articlesService', ['$http', function($http)
     function getAllFeeds() {
         return $http.post('/getFeed')
             .then(function(res) {
-                    return getArticles(res.data)
-                        // return res;
-
+                    return res;
                 },
                 function(error) {
                     console.log('Can not get saved feed');
                 })
     }
 
+    function getAllArticles () {
+        return getAllFeeds().then(function (res) {
+            dashboardService.feedTitle = 'All';
+            return getArticles(res.data);
+        })
+    }
+
     function getFeedById(id) {
         return $http.post('/getFeedById', { feedId: id })
             .then(function(res) {
+                    dashboardService.feedTitle = res.data.feedTitle;
                     return getArticles([res.data]);
                 },
                 function(error) {
@@ -88,7 +90,7 @@ angular.module('rssReader').factory('articlesService', ['$http', function($http)
     function getFeedByCat(category) {
         return $http.post('/getFeedByCat', { feedCategory: category })
             .then(function(res) {
-                    // console.log('getFeedByCat', res.data);
+                dashboardService.feedTitle = category;
                     return getArticles(res.data);
                 },
                 function(error) {
@@ -97,11 +99,10 @@ angular.module('rssReader').factory('articlesService', ['$http', function($http)
     }
 
     return {
-        // setAllArticles: setAllArticles,
-        // getAllArticles: getAllArticles,
         getArticles: getArticles,
         getFeedFromFeedparser: getFeedFromFeedparser,
         getAllFeeds: getAllFeeds,
+        getAllArticles: getAllArticles,
         getFeedById: getFeedById,
         getFeedByCat: getFeedByCat, 
         getSingleArticle: getSingleArticle

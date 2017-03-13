@@ -1,5 +1,5 @@
-<div class="contentHead" ng-show="isRead()">
-    <h2 ng-init="get()">{{titleFeed}}</h2>
+<div class="contentHead">
+    <h2 ng-bind=dashboardService.feedTitle></h2>
     <div class="row">
         <div class="col-lg-11 col-xs-11">
             <div class="btn-group" >
@@ -12,8 +12,6 @@
                 <li><a href="#">Newest</a></li>
                 <li><a href="#">Oldest</a></li>
             </ul>
-            <!-- <button type="button" class="btn btn-default " type="button" ng-click="getAllFeed()">get $state.params</button> -->
         </div>
     </div>
 </div>
-<!-- glyphicon glyphicon-sort -->
